@@ -1,9 +1,10 @@
-﻿using Prism.Mvvm;
+﻿using Prism.AppModel;
+using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace CopyPasteSnippet.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IPageLifecycleAware
     {
         protected INavigationService NavigationService { get; private set; }
 
@@ -35,6 +36,16 @@ namespace CopyPasteSnippet.ViewModels
         }
 
         public virtual void Destroy()
+        {
+
+        }
+
+        public virtual void OnAppearing()
+        {
+
+        }
+
+        public virtual void OnDisappearing()
         {
 
         }
