@@ -17,5 +17,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Prism.Unity.Forms" />
+    <None Remove="ViewModels\" />
+    <None Remove="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 </Project>

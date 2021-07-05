@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SimpleTimecard
+namespace SimpleTimecard.Views
 {
     public partial class MainPage : ContentPage
     {

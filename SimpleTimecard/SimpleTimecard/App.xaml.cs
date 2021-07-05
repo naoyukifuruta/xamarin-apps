@@ -1,28 +1,31 @@
-﻿using System;
+﻿using Prism;
+using Prism.Ioc;
+using SimpleTimecard.ViewModels;
+using SimpleTimecard.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace SimpleTimecard
 {
-    public partial class App : Application
+    public partial class App
     {
-        public App()
+        public App() : this(null) { }
+
+        public App(IPlatformInitializer platformInitializer) : base(platformInitializer)
+        {
+
+        }
+
+        protected override void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
     }
 }
