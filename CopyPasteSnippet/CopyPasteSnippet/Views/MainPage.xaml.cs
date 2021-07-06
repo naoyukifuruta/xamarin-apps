@@ -14,10 +14,5 @@ namespace CopyPasteSnippet.Views
         {
             InitializeComponent();
         }
-
-        protected override void OnAppearing()
-        {
-            
-        }
     }
 }
