@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimpleTimecard.Views.HistoryPage"
+             Visual="Material"
+             Title="{Binding Title}">
+
+    <StackLayout>
+        <ListView ItemsSource="{Binding TimecardHistories}"
+                  SeparatorColor="DarkGray"
+                  BackgroundColor="White">
+            <ListView.Behaviors>
+                <!--<behaviors:ListViewItemTappedBehavior Command="{Binding CellTappedCommand}" />-->
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Margin="8,0,0,0">
+                            <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd}'}"
+                                   TextColor="Black"
+                                   BackgroundColor="Transparent"
+                                   FontSize="Medium"
+                                   Margin="8"
+                                   VerticalTextAlignment="Center" />
+
+                            <Label Text="{Binding StartTime, StringFormat='{0:hh:MM}'}"
+                                   TextColor="Black"
+                                   BackgroundColor="Transparent"
+                                   FontSize="Medium"
+                                   Margin="8"
+                                   VerticalTextAlignment="Center" />
+
+                            <Label Text="{Binding EndTime, StringFormat='{0:hh:MM}'}"
+                                   TextColor="Black"
+                                   BackgroundColor="Transparent"
+                                   FontSize="Medium"
+                                   Margin="8"
+                                   VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

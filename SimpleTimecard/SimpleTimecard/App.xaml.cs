@@ -10,25 +10,21 @@ namespace SimpleTimecard
     {
         public App() : this(null) { }
 
-        public App(IPlatformInitializer platformInitializer) : base(platformInitializer)
-        {
-
-        }
+        public App(IPlatformInitializer platformInitializer) : base(platformInitializer) { }
 
         protected override void OnInitialized()
         {
             InitializeComponent();
 
-            //NavigationService.NavigateAsync("NavigationPage/MainPage");
-            NavigationService.NavigateAsync("NavigationPage/MyTabbedPage");
+            NavigationService.NavigateAsync("NavigationPage/MainTabbedPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-
-            containerRegistry.RegisterForNavigation<MyTabbedPage>();
+            containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
+            containerRegistry.RegisterForNavigation<TodayPage, TodayPageViewModel>();
+            containerRegistry.RegisterForNavigation<HistoryPage, HistoryPageViewModel>();
         }
     }
 }

@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace SimpleTimecard.Views
 {
-    public partial class MyTabbedPage
+    public partial class MainTabbedPage
     {
-        public MyTabbedPage()
+        public MainTabbedPage()
         {
             InitializeComponent();
         }

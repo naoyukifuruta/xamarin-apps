@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
 namespace SimpleTimecard.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class HistoryPage : ContentPage
     {
-        public MainPage()
+        public HistoryPage()
         {
             InitializeComponent();
         }
