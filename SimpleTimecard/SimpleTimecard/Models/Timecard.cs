@@ -1,9 +1,12 @@
 ﻿using System;
+using Realms;
+
 namespace SimpleTimecard.Models
 {
-    public class Timecard
+    public class Timecard : RealmObject
     {
-        public string TimecardId { get; set; }
+        [PrimaryKey]
+        public string TimecardId { get; set; } = Guid.NewGuid().ToString();
 
         public DateTimeOffset? StartTime { get; set; }
 

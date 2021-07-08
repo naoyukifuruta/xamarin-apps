@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Prism;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
+using Realms;
+using SimpleTimecard.Models;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -55,6 +58,8 @@ namespace SimpleTimecard.ViewModels
         public DelegateCommand EntryStartTimeCommand { get; set; }
         public DelegateCommand EntryEndTimeCommand { get; set; }
 
+        private string _todayTimecardId;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -68,6 +73,28 @@ namespace SimpleTimecard.ViewModels
 
             EntryStartTimeCommand = new DelegateCommand(EntryStartTime);
             EntryEndTimeCommand = new DelegateCommand(EntryEndTime);
+
+            var realm = Realm.GetInstance();
+            var allTimecards = realm.All<Timecard>().ToList();
+
+            if (allTimecards.Where(x => x.StartTime.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).Any())
+            {
+                var todayTimecard = allTimecards.Where(x => x.StartTime.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).First();
+                _todayTimecardId = todayTimecard.TimecardId;
+
+                if (todayTimecard.StartTime.HasValue)
+                {
+                    StartTimeLabelText = todayTimecard.StartTime.Value.ToLocalTime().ToString("HH:mm");
+                }
+                if (todayTimecard.EndTime.HasValue)
+                {
+                    EndTimeLabelText = todayTimecard.EndTime.Value.ToLocalTime().ToString("HH:mm");
+                }
+            }
+            else
+            {
+                _todayTimecardId = string.Empty;
+            }
         }
 
         /// <summary>
@@ -81,8 +108,31 @@ namespace SimpleTimecard.ViewModels
                 return;
             }
 
-            // TODO:
-            StartTimeLabelText = DateTime.Now.ToString("HH:mm");
+            // TODO: 更新
+
+            var entryDateTime = DateTime.Now;
+            var realm = Realm.GetInstance();
+
+            if (string.IsNullOrEmpty(_todayTimecardId))
+            {
+                // 新規登録
+                realm.Write(() =>
+                {
+                    var addedTimecard = realm.Add<Timecard>(new Timecard() { StartTime = entryDateTime });
+                    _todayTimecardId = addedTimecard.TimecardId;
+                });
+            }
+            else
+            {
+                // 更新
+                var timecard = realm.Find<Timecard>(_todayTimecardId);
+                realm.Write(() => {
+                    timecard.StartTime = entryDateTime;
+                    realm.Add<Timecard>(timecard, update: true);
+                });
+            }
+
+            StartTimeLabelText = entryDateTime.ToString("HH:mm");
         }
 
         /// <summary>
@@ -96,8 +146,29 @@ namespace SimpleTimecard.ViewModels
                 return;
             }
 
-            // TODO:
-            EndTimeLabelText = DateTime.Now.ToString("HH:mm");
+            var entryDateTime = DateTime.Now;
+            var realm = Realm.GetInstance();
+
+            if (string.IsNullOrEmpty(_todayTimecardId))
+            {
+                // 新規登録
+                realm.Write(() =>
+                {
+                    var addedTimecard = realm.Add<Timecard>(new Timecard() { EndTime = entryDateTime });
+                    _todayTimecardId = addedTimecard.TimecardId;
+                });
+            }
+            else
+            {
+                // 更新
+                var timecard = realm.Find<Timecard>(_todayTimecardId);
+                realm.Write(() => {
+                    timecard.EndTime = entryDateTime;
+                    realm.Add<Timecard>(timecard, update: true);
+                });
+            }
+
+            EndTimeLabelText = entryDateTime.ToString("HH:mm");
         }
     }
 }
