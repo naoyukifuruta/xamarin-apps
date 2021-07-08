@@ -8,7 +8,5 @@ namespace SimpleTimecard.Models
         public DateTimeOffset? StartTime { get; set; }
 
         public DateTimeOffset? EndTime { get; set; }
-
-        public string Remarks { get; set; }
     }
 }

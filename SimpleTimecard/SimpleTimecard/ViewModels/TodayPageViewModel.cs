@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Prism;
+using Prism.Commands;
 using Prism.Navigation;
-using Xamarin.Forms;
+using Prism.Services;
 
 namespace SimpleTimecard.ViewModels
 {
     public class TodayPageViewModel : ViewModelBase, IActiveAware
     {
+        private readonly IPageDialogService _pageDialogService;
+
+        // タブがアクティブかどうか
         private bool _isActive;
         public bool IsActive
         {
@@ -27,9 +30,74 @@ namespace SimpleTimecard.ViewModels
         }
         public event EventHandler IsActiveChanged;
 
-        public TodayPageViewModel(INavigationService navigationService) : base(navigationService)
+        // 出勤時間
+        private string _startTimeLabelText = "--:--";
+        public string StartTimeLabelText
         {
+            get { return _startTimeLabelText; }
+            set
+            {
+                SetProperty(ref _startTimeLabelText, value);
+            }
+        }
+
+        // 退勤時間
+        private string _endTimeLabelText = "--:--";
+        public string EndTimeLabelText
+        {
+            get { return _endTimeLabelText; }
+            set
+            {
+                SetProperty(ref _endTimeLabelText, value);
+            }
+        }
+
+        public DelegateCommand EntryStartTimeCommand { get; set; }
+        public DelegateCommand EntryEndTimeCommand { get; set; }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="navigationService"></param>
+        /// <param name="pageDialogService"></param>
+        public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
+        {
+            _pageDialogService = pageDialogService;
+
             Title = "Today";
+
+            EntryStartTimeCommand = new DelegateCommand(EntryStartTime);
+            EntryEndTimeCommand = new DelegateCommand(EntryEndTime);
+        }
+
+        /// <summary>
+        /// 出勤時間の登録
+        /// </summary>
+        private async void EntryStartTime()
+        {
+            var result = await _pageDialogService.DisplayAlertAsync("確認", "出勤時間の登録を行いますか？", "OK", "キャンセル");
+            if (!result)
+            {
+                return;
+            }
+
+            // TODO:
+            StartTimeLabelText = DateTime.Now.ToString("HH:mm");
+        }
+
+        /// <summary>
+        /// 退勤時間の登録
+        /// </summary>
+        private async void EntryEndTime()
+        {
+            var result = await _pageDialogService.DisplayAlertAsync("確認", "退勤時間の登録を行いますか？", "OK", "キャンセル");
+            if (!result)
+            {
+                return;
+            }
+
+            // TODO:
+            EndTimeLabelText = DateTime.Now.ToString("HH:mm");
         }
     }
 }

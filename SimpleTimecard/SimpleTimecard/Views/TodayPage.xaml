@@ -10,16 +10,16 @@
             <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal" Margin="0,32,0,0">
                     <Label Text="出勤時間" TextColor="Black" FontSize="Large"/>
-                    <Label Text="--:--" TextColor="Black" FontSize="Large" Margin="16,0,0,0"/>
+                    <Label Text="{Binding StartTimeLabelText}" TextColor="Black" FontSize="Large" Margin="16,0,0,0"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="0,0,0,0">
                     <Label Text="退勤時間" TextColor="Black" FontSize="Large"/>
-                    <Label Text="--:--" TextColor="Black" FontSize="Large" Margin="16,0,0,0"/>
+                    <Label Text="{Binding EndTimeLabelText}" TextColor="Black" FontSize="Large" Margin="16,0,0,0"/>
                 </StackLayout>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="0,48,0,0" HorizontalOptions="Center">
-                <Button Text="出勤登録" FontSize="Large" BackgroundColor="LightGray" TextColor="Black" HorizontalOptions="StartAndExpand"/>
-                <Button Text="退勤登録" FontSize="Large" BackgroundColor="LightGray" TextColor="Black" HorizontalOptions="EndAndExpand"/>
+                <Button Text="出勤登録" Command="{Binding EntryStartTimeCommand}" FontSize="Large" BackgroundColor="LightGray" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                <Button Text="退勤登録" Command="{Binding EntryEndTimeCommand}" FontSize="Large" BackgroundColor="LightGray" TextColor="Black" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
         </StackLayout>
     </StackLayout>
