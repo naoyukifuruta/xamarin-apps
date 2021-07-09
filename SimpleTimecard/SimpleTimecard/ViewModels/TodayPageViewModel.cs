@@ -14,7 +14,6 @@ namespace SimpleTimecard.ViewModels
     {
         private readonly IPageDialogService _pageDialogService;
 
-        // タブがアクティブかどうか
         private bool _isActive;
         public bool IsActive
         {
@@ -33,30 +32,35 @@ namespace SimpleTimecard.ViewModels
         }
         public event EventHandler IsActiveChanged;
 
+        public string StartTimeLabelText { get; set; }
+        public string EndTimeLabelText { get; set; }
+        public string StartTimeRegistButtonText { get; set; }
+        public string EndTimeRegistButtonText { get; set; }
+
         // 出勤時間
-        private string _startTimeLabelText = "--:--";
-        public string StartTimeLabelText
+        private string _stampingStartTimeLabelText = string.Empty;
+        public string StampingStartTimeLabelText
         {
-            get { return _startTimeLabelText; }
+            get { return _stampingStartTimeLabelText; }
             set
             {
-                SetProperty(ref _startTimeLabelText, value);
+                SetProperty(ref _stampingStartTimeLabelText, value);
             }
         }
 
         // 退勤時間
-        private string _endTimeLabelText = "--:--";
-        public string EndTimeLabelText
+        private string _stampingEndTimeLabelText = string.Empty;
+        public string StampingEndTimeLabelText
         {
-            get { return _endTimeLabelText; }
+            get { return _stampingEndTimeLabelText; }
             set
             {
-                SetProperty(ref _endTimeLabelText, value);
+                SetProperty(ref _stampingEndTimeLabelText, value);
             }
         }
 
-        public DelegateCommand EntryStartTimeCommand { get; set; }
-        public DelegateCommand EntryEndTimeCommand { get; set; }
+        public DelegateCommand StartTimeRegistButtonCommand { get; set; }
+        public DelegateCommand EndTimeRegistButtonCommand { get; set; }
 
         private string _todayTimecardId;
 
@@ -69,26 +73,34 @@ namespace SimpleTimecard.ViewModels
         {
             _pageDialogService = pageDialogService;
 
+            // 画面テキスト
             Title = "Today";
+            StartTimeLabelText = "出勤時間：";
+            EndTimeLabelText = "退勤時間：";
+            StartTimeRegistButtonText = "出勤登録";
+            EndTimeRegistButtonText = "退勤登録";
 
-            EntryStartTimeCommand = new DelegateCommand(EntryStartTime);
-            EntryEndTimeCommand = new DelegateCommand(EntryEndTime);
+            // ボタンイベント
+            StartTimeRegistButtonCommand = new DelegateCommand(RegisterStartTime);
+            EndTimeRegistButtonCommand = new DelegateCommand(RegisterEndTime);
 
+            // 当日分の取得
             var realm = Realm.GetInstance();
             var allTimecards = realm.All<Timecard>().ToList();
-
+            // TODO: ここの処理はあとで見直したい
             if (allTimecards.Where(x => x.StartTime.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).Any())
             {
                 var todayTimecard = allTimecards.Where(x => x.StartTime.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).First();
                 _todayTimecardId = todayTimecard.TimecardId;
 
+                // 登録がある場合は画面に表示
                 if (todayTimecard.StartTime.HasValue)
                 {
-                    StartTimeLabelText = todayTimecard.StartTime.Value.ToLocalTime().ToString("HH:mm");
+                    StampingStartTimeLabelText = todayTimecard.StartTime.Value.ToLocalTime().ToString("HH:mm");
                 }
                 if (todayTimecard.EndTime.HasValue)
                 {
-                    EndTimeLabelText = todayTimecard.EndTime.Value.ToLocalTime().ToString("HH:mm");
+                    StampingEndTimeLabelText = todayTimecard.EndTime.Value.ToLocalTime().ToString("HH:mm");
                 }
             }
             else
@@ -100,7 +112,7 @@ namespace SimpleTimecard.ViewModels
         /// <summary>
         /// 出勤時間の登録
         /// </summary>
-        private async void EntryStartTime()
+        private async void RegisterStartTime()
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "出勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -132,13 +144,13 @@ namespace SimpleTimecard.ViewModels
                 });
             }
 
-            StartTimeLabelText = entryDateTime.ToString("HH:mm");
+            StampingStartTimeLabelText = entryDateTime.ToString("HH:mm");
         }
 
         /// <summary>
         /// 退勤時間の登録
         /// </summary>
-        private async void EntryEndTime()
+        private async void RegisterEndTime()
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "退勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -168,7 +180,7 @@ namespace SimpleTimecard.ViewModels
                 });
             }
 
-            EndTimeLabelText = entryDateTime.ToString("HH:mm");
+            StampingEndTimeLabelText = entryDateTime.ToString("HH:mm");
         }
     }
 }

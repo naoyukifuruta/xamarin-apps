@@ -5,6 +5,8 @@ using Prism.Navigation;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using SimpleTimecard.Models;
+using Realms;
+using System.Linq;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -47,25 +49,10 @@ namespace SimpleTimecard.ViewModels
         {
             base.OnAppearing();
 
-            var hoge = new List<Timecard>();
-            hoge.Add(new Timecard
-            {
-                StartTime = DateTime.Now
-            });
-            hoge.Add(new Timecard
-            {
-                StartTime = DateTime.Now
-            });
-            hoge.Add(new Timecard
-            {
-                StartTime = DateTime.Now
-            });
-            hoge.Add(new Timecard
-            {
-                StartTime = DateTime.Now
-            });
+            var realm = Realm.GetInstance();
+            var allTimecards = realm.All<Timecard>().ToList();
 
-            TimecardHistories = hoge;
+            TimecardHistories = allTimecards;
         }
     }
 }
