@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using SimpleTimecard.Models;
 using Realms;
 using System.Linq;
+using Prism.Commands;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -40,9 +43,16 @@ namespace SimpleTimecard.ViewModels
             }
         }
 
+        public ICommand CellTappedCommand { get; set; }
+
         public HistoryPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "History";
+
+            CellTappedCommand = new Command<Timecard>((timecard) =>
+            {
+                TappedListCell(timecard);
+            });
         }
 
         public override void OnAppearing()
@@ -53,6 +63,13 @@ namespace SimpleTimecard.ViewModels
             var allTimecards = realm.All<Timecard>().ToList();
 
             TimecardHistories = allTimecards;
+        }
+
+        public void TappedListCell(Timecard timecard)
+        {
+            Debug.WriteLine($"{timecard.TimecardId}");
+            Debug.WriteLine($"{timecard.StartTime}");
+            Debug.WriteLine($"{timecard.EndTime}");
         }
     }
 }

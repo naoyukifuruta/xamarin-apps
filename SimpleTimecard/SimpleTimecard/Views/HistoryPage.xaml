@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:SimpleTimecard.Behaviors"
              x:Class="SimpleTimecard.Views.HistoryPage"
              Visual="Material"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             xmlns:prism="http://prismlibrary.com">
 
     <StackLayout>
         <ListView ItemsSource="{Binding TimecardHistories}"
                   SeparatorColor="DarkGray"
                   BackgroundColor="White">
             <ListView.Behaviors>
-                <!--<behaviors:ListViewItemTappedBehavior Command="{Binding CellTappedCommand}" />-->
+                <behaviors:ListViewItemTappedBehavior Command="{Binding CellTappedCommand}" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>

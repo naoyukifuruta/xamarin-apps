@@ -24,10 +24,12 @@
     <None Remove="Models\" />
     <None Remove="Xamarin.Forms.Visual.Material" />
     <None Remove="Realm" />
+    <None Remove="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="Models\" />
+    <Folder Include="Behaviors\" />
   </ItemGroup>
 </Project>
