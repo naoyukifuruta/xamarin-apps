@@ -7,7 +7,9 @@
              Title="{Binding Title}"
              xmlns:prism="http://prismlibrary.com">
 
-    <StackLayout>
+    <StackLayout Orientation="Vertical">
+        <Button Text="新規登録" HorizontalOptions="FillAndExpand" Margin="8"
+                FontSize="Medium" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"/>
         <ListView ItemsSource="{Binding TimecardHistories}"
                   SeparatorColor="DarkGray"
                   BackgroundColor="White">
@@ -17,27 +19,32 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Margin="8,0,0,0">
+                        <StackLayout Orientation="Horizontal" Margin="8,4,8,4" >
                             <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd}'}"
                                    TextColor="Black"
                                    BackgroundColor="Transparent"
                                    FontSize="Medium"
                                    Margin="8"
-                                   VerticalTextAlignment="Center" />
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="Start"/>
 
                             <Label Text="{Binding StartTime, StringFormat='{0:HH:mm}'}"
                                    TextColor="Black"
                                    BackgroundColor="Transparent"
                                    FontSize="Medium"
                                    Margin="8"
-                                   VerticalTextAlignment="Center" />
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="Center"/>
 
                             <Label Text="{Binding EndTime, StringFormat='{0:HH:mm}'}"
                                    TextColor="Black"
                                    BackgroundColor="Transparent"
                                    FontSize="Medium"
                                    Margin="8"
-                                   VerticalTextAlignment="Center" />
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="Start"/>
+                            <Button Text="削除" HorizontalOptions="EndAndExpand"
+                                    FontSize="Medium" TextColor="White" BackgroundColor="IndianRed" BorderColor="LightGray" BorderWidth="1"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

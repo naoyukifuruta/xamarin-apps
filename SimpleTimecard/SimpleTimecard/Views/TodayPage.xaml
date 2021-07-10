@@ -18,10 +18,10 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="0,48,0,0" HorizontalOptions="Center">
-                <Button Text="{Binding StartTimeRegistButtonText}" Command="{Binding StartTimeRegistButtonCommand}"
-                        HorizontalOptions="StartAndExpand" FontSize="Large" BackgroundColor="LightGray" TextColor="Black"/>
-                <Button Text="{Binding EndTimeRegistButtonText}" Command="{Binding EndTimeRegistButtonCommand}"
-                        HorizontalOptions="EndAndExpand" FontSize="Large" BackgroundColor="LightGray" TextColor="Black"/>
+                <Button Text="{Binding StartTimeRegistButtonText}" Command="{Binding StartTimeRegistButtonCommand}" HorizontalOptions="StartAndExpand"
+                        FontSize="Medium" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"/>
+                <Button Text="{Binding EndTimeRegistButtonText}" Command="{Binding EndTimeRegistButtonCommand}" HorizontalOptions="EndAndExpand"
+                        FontSize="Medium" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"/>
             </StackLayout>
         </StackLayout>
     </StackLayout>
