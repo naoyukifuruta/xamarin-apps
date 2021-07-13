@@ -13,26 +13,8 @@ using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
-    public class HistoryPageViewModel : ViewModelBase, IActiveAware
+    public class HistoryPageViewModel : ViewModelBase
     {
-        private bool _isActive;
-        public bool IsActive
-        {
-            get
-            {
-                return _isActive;
-            }
-            set
-            {
-                if (value)
-                {
-                    Debug.WriteLine($"{typeof(HistoryPageViewModel).Name} is Active!");
-                }
-                SetProperty(ref this._isActive, value);
-            }
-        }
-        public event EventHandler IsActiveChanged;
-
         private List<Timecard> _timecardHistories;
         public List<Timecard> TimecardHistories
         {
