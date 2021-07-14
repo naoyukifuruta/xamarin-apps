@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
-using Prism;
 using Prism.AppModel;
 using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace SimpleTimecard.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IPageLifecycleAware, IActiveAware
+    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IPageLifecycleAware
     {
         /// <summary>
         /// 画面タイトル
@@ -31,20 +29,6 @@ namespace SimpleTimecard.ViewModels
             private set;
         }
 
-        private bool _isActive;
-        public bool IsActive
-        {
-            get
-            {
-                return _isActive;
-            }
-            set
-            {
-                SetProperty(ref this._isActive, value);
-            }
-        }
-        public event EventHandler IsActiveChanged;
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -65,10 +49,5 @@ namespace SimpleTimecard.ViewModels
         public virtual void OnAppearing() { }
 
         public virtual void OnDisappearing() { }
-
-        protected virtual void RaiseIsActiveChanged()
-        {
-            IsActiveChanged?.Invoke(this, EventArgs.Empty);
-        }
     }
 }

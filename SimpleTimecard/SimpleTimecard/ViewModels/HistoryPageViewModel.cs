@@ -1,14 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Prism;
-using Prism.Navigation;
-using Prism.Mvvm;
-using System.Collections.Generic;
-using SimpleTimecard.Models;
-using Realms;
 using System.Linq;
-using Prism.Commands;
 using System.Windows.Input;
+using Prism.Navigation;
+using Realms;
+using SimpleTimecard.Models;
 using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
-using Prism;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
