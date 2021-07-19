@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
-
-namespace SimpleTimecard.Views
+﻿namespace SimpleTimecard.Views
 {
     public partial class MainTabbedPage
     {

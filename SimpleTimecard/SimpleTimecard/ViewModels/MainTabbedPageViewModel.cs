@@ -8,6 +8,7 @@ namespace SimpleTimecard.ViewModels
     {
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+            // ページタイトルに現在時刻を表示
             new Task(async () =>
             {
                 while (true)
