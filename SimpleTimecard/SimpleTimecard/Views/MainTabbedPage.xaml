@@ -6,8 +6,15 @@
             Visual="Material"
             Title="{Binding Title}">
 
-    <views:TodayPage Title="Today"/>
-    <views:HistoryPage Title="History"/>
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="設定"
+                 IconImageSource="settings.png"
+                 Order="Primary"
+                 Priority="0" />
+    </TabbedPage.ToolbarItems>
+
+    <views:TodayPage Title="今日" IconImageSource="today.png"/>
+    <views:HistoryPage Title="履歴" IconImageSource="schedule.png"/>
 
 </TabbedPage>
 

@@ -144,4 +144,12 @@
       <Name>SimpleTimecard</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\today.png" />
+    <BundleResource Include="Resources\today%402x.png" />
+    <BundleResource Include="Resources\schedule.png" />
+    <BundleResource Include="Resources\schedule%402x.png" />
+    <BundleResource Include="Resources\settings.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+  </ItemGroup>
 </Project>
