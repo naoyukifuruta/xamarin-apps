@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTimecard.iOS", "Simpl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTimecard", "SimpleTimecard\SimpleTimecard.csproj", "{A6BE40F0-4FB7-482D-B122-851BC9F6B0D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTimecard.UnitTest", "SimpleTimecard.UnitTest\SimpleTimecard.UnitTest.csproj", "{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{A6BE40F0-4FB7-482D-B122-851BC9F6B0D4}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{A6BE40F0-4FB7-482D-B122-851BC9F6B0D4}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{A6BE40F0-4FB7-482D-B122-851BC9F6B0D4}.Release|iPhone.Build.0 = Release|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{93C5CE66-6BF4-497A-A45D-CF4E5AD5C30B}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
