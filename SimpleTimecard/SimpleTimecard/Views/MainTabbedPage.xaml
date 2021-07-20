@@ -7,7 +7,7 @@
             Title="{Binding Title}">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="設定" IconImageSource="settings.png"/>
+        <ToolbarItem Text="設定" IconImageSource="settings.png" Command="{Binding SettingButtonCommand}"/>
     </TabbedPage.ToolbarItems>
 
     <views:TodayPage Title="今日" IconImageSource="today.png"/>
