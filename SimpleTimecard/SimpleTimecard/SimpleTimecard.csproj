@@ -25,11 +25,13 @@
     <None Remove="Xamarin.Forms.Visual.Material" />
     <None Remove="Realm" />
     <None Remove="Behaviors\" />
+    <None Remove="Common\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="Models\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Common\" />
   </ItemGroup>
 </Project>
