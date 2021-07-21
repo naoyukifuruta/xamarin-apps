@@ -19,32 +19,21 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Margin="8,4,8,4" >
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="8,4,8,4">
                             <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd}'}"
-                                   TextColor="Black"
-                                   BackgroundColor="Transparent"
-                                   FontSize="Medium"
-                                   Margin="8"
+                                   TextColor="Black" FontSize="Medium"
                                    VerticalTextAlignment="Center"
                                    HorizontalOptions="Start"/>
 
                             <Label Text="{Binding StartTime, StringFormat='{0:HH:mm}'}"
-                                   TextColor="Black"
-                                   BackgroundColor="Transparent"
-                                   FontSize="Medium"
-                                   Margin="8"
+                                   TextColor="Black" FontSize="Medium"
                                    VerticalTextAlignment="Center"
-                                   HorizontalOptions="Center"/>
+                                   HorizontalOptions="End"/>
 
                             <Label Text="{Binding EndTime, StringFormat='{0:HH:mm}'}"
-                                   TextColor="Black"
-                                   BackgroundColor="Transparent"
-                                   FontSize="Medium"
-                                   Margin="8"
+                                   TextColor="Black" FontSize="Medium"
                                    VerticalTextAlignment="Center"
-                                   HorizontalOptions="Start"/>
-                            <Button Text="削除" HorizontalOptions="EndAndExpand"
-                                    FontSize="Medium" TextColor="White" BackgroundColor="IndianRed" BorderColor="LightGray" BorderWidth="1"/>
+                                   HorizontalOptions="End"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
