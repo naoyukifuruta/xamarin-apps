@@ -11,5 +11,9 @@ namespace SimpleTimecard.Models
         public DateTimeOffset? StartTime { get; set; }
 
         public DateTimeOffset? EndTime { get; set; }
+
+        public string StartTimeString { get; set; }
+
+        public string EndTimeString { get; set; }
     }
 }

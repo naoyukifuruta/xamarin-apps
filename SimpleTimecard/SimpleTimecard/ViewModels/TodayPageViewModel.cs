@@ -110,7 +110,12 @@ namespace SimpleTimecard.ViewModels
                 // 新規登録
                 realm.Write(() =>
                 {
-                    var addedTimecard = realm.Add<Timecard>(new Timecard() { StartTime = entryDateTime });
+                    var addedTimecard = realm.Add<Timecard>(new Timecard()
+                    {
+                        StartTime = entryDateTime,
+                        StartTimeString = entryDateTime.ToLocalTime().ToString("HH:mm"),
+                    });
+
                     _todayTimecardId = addedTimecard.TimecardId;
                 });
             }
@@ -120,6 +125,7 @@ namespace SimpleTimecard.ViewModels
                 var timecard = realm.Find<Timecard>(_todayTimecardId);
                 realm.Write(() => {
                     timecard.StartTime = entryDateTime;
+                    timecard.StartTimeString = entryDateTime.ToLocalTime().ToString("HH:mm");
                     realm.Add<Timecard>(timecard, update: true);
                 });
             }
@@ -146,7 +152,11 @@ namespace SimpleTimecard.ViewModels
                 // 新規登録
                 realm.Write(() =>
                 {
-                    var addedTimecard = realm.Add<Timecard>(new Timecard() { EndTime = entryDateTime });
+                    var addedTimecard = realm.Add<Timecard>(new Timecard()
+                    {
+                        EndTime = entryDateTime,
+                        EndTimeString = entryDateTime.ToLocalTime().ToString("HH:mm"),
+                    });
                     _todayTimecardId = addedTimecard.TimecardId;
                 });
             }
@@ -156,6 +166,7 @@ namespace SimpleTimecard.ViewModels
                 var timecard = realm.Find<Timecard>(_todayTimecardId);
                 realm.Write(() => {
                     timecard.EndTime = entryDateTime;
+                    timecard.EndTimeString = entryDateTime.ToLocalTime().ToString("HH:mm");
                     realm.Add<Timecard>(timecard, update: true);
                 });
             }
