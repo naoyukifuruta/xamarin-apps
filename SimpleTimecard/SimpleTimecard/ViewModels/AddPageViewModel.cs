@@ -54,7 +54,7 @@ namespace SimpleTimecard.ViewModels
             CancelButtonCommand = new DelegateCommand(Cancel);
         }
 
-        private void Entry()
+        private async void Entry()
         {
             var realm = Realm.GetInstance();
             realm.Write(() =>
@@ -68,7 +68,7 @@ namespace SimpleTimecard.ViewModels
                 });
             });
 
-            Cancel();
+            await base.NavigationService.GoBackAsync();
         }
 
         private async void Cancel()
