@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Navigation;
@@ -12,9 +11,10 @@ namespace SimpleTimecard.ViewModels
 
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+            // ナビゲーションバーの設定ボタン押下時のコマンドを設定
             SettingButtonCommand = new DelegateCommand(TransitionSettingPage);
 
-            // ページタイトルに現在時刻を表示
+            // ナビゲーションタイトルに現在時刻を表示
             new Task(async () =>
             {
                 while (true)
@@ -27,9 +27,12 @@ namespace SimpleTimecard.ViewModels
             }).Start();
         }
 
+        /// <summary>
+        /// 設定画面へ遷移
+        /// </summary>
         private void TransitionSettingPage()
         {
-            Debug.WriteLine("test");
+            NavigationService.NavigateAsync("SettingPage");
         }
     }
 }

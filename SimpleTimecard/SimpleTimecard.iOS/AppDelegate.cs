@@ -25,6 +25,7 @@ namespace SimpleTimecard.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FormsMaterial.Init();
+            AiForms.Renderers.iOS.SettingsViewInit.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

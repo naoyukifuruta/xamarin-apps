@@ -26,6 +26,7 @@ namespace SimpleTimecard
             containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<TodayPage, TodayPageViewModel>();
             containerRegistry.RegisterForNavigation<HistoryPage, HistoryPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
         }
 
         /// <summary>

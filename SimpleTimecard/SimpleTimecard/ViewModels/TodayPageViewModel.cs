@@ -63,6 +63,11 @@ namespace SimpleTimecard.ViewModels
             // ボタンイベント
             StartTimeRegistButtonCommand = new DelegateCommand(RegisterStartTime);
             EndTimeRegistButtonCommand = new DelegateCommand(RegisterEndTime);
+        }
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
 
             // 当日分の取得
             var realm = Realm.GetInstance();
@@ -86,6 +91,8 @@ namespace SimpleTimecard.ViewModels
             else
             {
                 _todayTimecardId = string.Empty;
+                StampingStartTimeLabelText = string.Empty;
+                StampingEndTimeLabelText = string.Empty;
             }
         }
 

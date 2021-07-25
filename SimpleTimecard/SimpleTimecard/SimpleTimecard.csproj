@@ -16,6 +16,7 @@
     <PackageReference Include="Prism.Unity.Forms" Version="8.1.97" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2083" />
     <PackageReference Include="Realm" Version="10.3.0" />
+    <PackageReference Include="AiForms.SettingsView" Version="1.3.21" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Prism.Unity.Forms" />
@@ -26,6 +27,8 @@
     <None Remove="Realm" />
     <None Remove="Behaviors\" />
     <None Remove="Common\" />
+    <None Remove="AiForms.SettingsView" />
+    <None Remove="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -33,5 +36,6 @@
     <Folder Include="Models\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Common\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>
