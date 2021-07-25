@@ -4,8 +4,7 @@
              xmlns:behaviors="clr-namespace:SimpleTimecard.Behaviors"
              x:Class="SimpleTimecard.Views.HistoryPage"
              Visual="Material"
-             Title="{Binding Title}"
-             xmlns:prism="http://prismlibrary.com">
+             Title="{Binding Title}">
 
     <StackLayout Orientation="Vertical">
         <Button Text="追加" HorizontalOptions="FillAndExpand" Margin="8"
@@ -20,6 +19,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="削除" IsDestructive="True" />
+                        </ViewCell.ContextActions>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="16,0,0,0">
                             <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd ddd}'}"
                                    TextColor="Black" FontSize="Medium"

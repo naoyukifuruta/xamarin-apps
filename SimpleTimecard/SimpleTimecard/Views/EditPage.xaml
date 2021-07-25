@@ -1,33 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SimpleTimecard.Views.AddPage"
+             x:Class="SimpleTimecard.Views.EditPage"
              Visual="Material"
              Title="{Binding Title}">
 
     <StackLayout Padding="32">
         <StackLayout Orientation="Horizontal">
             <Label Text="登録日付" FontSize="Medium" VerticalTextAlignment="Center" Margin="0,0,8,0"/>
-            <DatePicker Date="{Binding SelectedEntryDate}" Format="yyyy/MM/dd" MinimumDate="2000/01/01" MaximumDate="2030/01/01"
-                        HorizontalOptions="FillAndExpand"/>
+            <DatePicker Format="yyyy/MM/dd" MinimumDate="2000/01/01" MaximumDate="2030/01/01" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="出勤時刻" FontSize="Medium" VerticalTextAlignment="Center" Margin="0,0,8,0"/>
-            <TimePicker Time="{Binding SelectedStartTime}" HorizontalOptions="FillAndExpand"/>
+            <TimePicker Time="00:00" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="退勤時刻" FontSize="Medium" VerticalTextAlignment="Center" Margin="0,0,8,0"/>
-            <TimePicker Time="{Binding SelectedEndTime}" HorizontalOptions="FillAndExpand"/>
+            <TimePicker Time="00:00" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,48,0,0">
             <Button Text="キャンセル" WidthRequest="120" HeightRequest="40"
-                    FontSize="Default" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"
-                    Command="{Binding CancelButtonCommand}"/>
-            <Button Text="登録" WidthRequest="120" HeightRequest="40"
-                    FontSize="Default" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"
-                    Command="{Binding EntryButtonCommand}"/>
+                    FontSize="Default" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"/>
+            <Button Text="更新" WidthRequest="120" HeightRequest="40"
+                    FontSize="Default" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"/>
         </StackLayout>
     </StackLayout>
-
 </ContentPage>
