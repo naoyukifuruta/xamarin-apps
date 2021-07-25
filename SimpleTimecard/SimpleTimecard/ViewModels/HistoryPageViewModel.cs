@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
+using Prism.Commands;
 using Prism.Navigation;
 using Realms;
 using SimpleTimecard.Models;
@@ -21,11 +22,14 @@ namespace SimpleTimecard.ViewModels
             }
         }
 
+        public DelegateCommand AddButtonCommand { get; set; }
         public ICommand CellTappedCommand { get; set; }
 
         public HistoryPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "History";
+
+            AddButtonCommand = new DelegateCommand(TransitionSettingPage);
 
             CellTappedCommand = new Command<Timecard>((timecard) =>
             {
@@ -41,6 +45,11 @@ namespace SimpleTimecard.ViewModels
             var allTimecards = realm.All<Timecard>().ToList();
 
             TimecardHistories = allTimecards;
+        }
+
+        private void TransitionSettingPage()
+        {
+            NavigationService.NavigateAsync("AddPage");
         }
 
         public void TappedListCell(Timecard timecard)

@@ -8,8 +8,9 @@
              xmlns:prism="http://prismlibrary.com">
 
     <StackLayout Orientation="Vertical">
-        <Button Text="新規登録" HorizontalOptions="FillAndExpand" Margin="8"
-                FontSize="Medium" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"/>
+        <Button Text="追加" HorizontalOptions="FillAndExpand" Margin="8"
+                FontSize="Default" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"
+                Command="{Binding AddButtonCommand}"/>
         <ListView ItemsSource="{Binding TimecardHistories}"
                   SeparatorColor="DarkGray"
                   BackgroundColor="White">
@@ -20,7 +21,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="16,0,0,0">
-                            <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd}'}"
+                            <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd ddd}'}"
                                    TextColor="Black" FontSize="Medium"
                                    VerticalTextAlignment="Center"
                                    HorizontalOptions="Start"/>
