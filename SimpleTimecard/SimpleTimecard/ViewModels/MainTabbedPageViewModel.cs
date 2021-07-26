@@ -12,7 +12,10 @@ namespace SimpleTimecard.ViewModels
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             // ナビゲーションバーの設定ボタン押下時のコマンドを設定
-            SettingButtonCommand = new DelegateCommand(TransitionSettingPage);
+            SettingButtonCommand = new DelegateCommand(async () =>
+            {
+                await NavigationService.NavigateAsync("SettingPage");
+            });
 
             // ナビゲーションタイトルに現在時刻を表示
             new Task(async () =>
@@ -25,14 +28,6 @@ namespace SimpleTimecard.ViewModels
                     await Task.Delay(1000);
                 }
             }).Start();
-        }
-
-        /// <summary>
-        /// 設定画面へ遷移
-        /// </summary>
-        private void TransitionSettingPage()
-        {
-            NavigationService.NavigateAsync("SettingPage");
         }
     }
 }

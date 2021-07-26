@@ -20,27 +20,26 @@ namespace SimpleTimecard.ViewModels
 
             _pageDialogService = pageDialogService;
 
-            InitializedDatabaseCommand = new DelegateCommand(InitializedDatabase);
-        }
-
-        private async void InitializedDatabase()
-        {
-            var result = await _pageDialogService.DisplayAlertAsync("確認", "データベースを初期化しますか？", "OK", "キャンセル");
-            if (!result)
+            // DB初期化コマンドの定義
+            InitializedDatabaseCommand = new DelegateCommand(async () =>
             {
-                return;
-            }
+                var result = await _pageDialogService.DisplayAlertAsync("確認", "データベースを初期化しますか？", "OK", "キャンセル");
+                if (!result)
+                {
+                    return;
+                }
 
-            var realm = Realm.GetInstance();
-            using (var tran = realm.BeginWrite())
-            {
-                realm.RemoveAll<Timecard>();
-                tran.Commit();
+                var realm = Realm.GetInstance();
+                using (var tran = realm.BeginWrite())
+                {
+                    realm.RemoveAll<Timecard>();
+                    tran.Commit();
 
-                // トランザクション張る意味ないけど書き方を試す目的で
-            }
+                    // トランザクション張る意味ないけど書き方を試す目的で
+                }
 
-            DependencyService.Get<IToast>().Show("データを全削除しました。");
+                DependencyService.Get<IToast>().Show("データを全削除しました。");
+            });
         }
     }
 }

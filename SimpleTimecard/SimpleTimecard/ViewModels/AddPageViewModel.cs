@@ -2,7 +2,6 @@
 using Prism.Commands;
 using Prism.Navigation;
 using Realms;
-using SimpleTimecard.Common;
 using SimpleTimecard.Models;
 
 namespace SimpleTimecard.ViewModels
