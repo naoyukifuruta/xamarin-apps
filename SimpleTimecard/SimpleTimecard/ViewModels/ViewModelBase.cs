@@ -4,38 +4,27 @@ using Prism.Navigation;
 
 namespace SimpleTimecard.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IPageLifecycleAware
+    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, IPageLifecycleAware, IApplicationLifecycleAware
     {
-        /// <summary>
-        /// 画面タイトル
-        /// </summary>
+        // Navigation
+        protected INavigationService NavigationService { get; private set; }
+
+        // ページタイトル
         private string _title;
         public string Title
         {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                SetProperty(ref _title, value);
-            }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
-        protected INavigationService NavigationService
-        {
-            get;
-            private set;
-        }
+        public ViewModelBase() { }
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="navigationService"></param>
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
         }
+
+        public virtual void Initialize(INavigationParameters parameters) { }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
 
@@ -48,5 +37,9 @@ namespace SimpleTimecard.ViewModels
         public virtual void OnAppearing() { }
 
         public virtual void OnDisappearing() { }
+
+        public virtual void OnResume() { }
+
+        public virtual void OnSleep() { }
     }
 }
