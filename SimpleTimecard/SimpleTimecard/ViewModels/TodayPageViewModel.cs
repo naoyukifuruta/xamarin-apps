@@ -4,6 +4,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Realms;
+using SimpleTimecard.Common;
 using SimpleTimecard.Models;
 
 namespace SimpleTimecard.ViewModels
@@ -12,62 +13,40 @@ namespace SimpleTimecard.ViewModels
     {
         private readonly IPageDialogService _pageDialogService;
 
-        public string StartTimeLabelText { get; set; }
-        public string EndTimeLabelText { get; set; }
-        public string StartTimeRegistButtonText { get; set; }
-        public string EndTimeRegistButtonText { get; set; }
+        private string _todayTimecardId;
 
-        // 出勤時間
         private string _stampingStartTimeLabelText = string.Empty;
         public string StampingStartTimeLabelText
         {
             get { return _stampingStartTimeLabelText; }
-            set
-            {
-                SetProperty(ref _stampingStartTimeLabelText, value);
-            }
+            set { SetProperty(ref _stampingStartTimeLabelText, value); }
         }
 
-        // 退勤時間
         private string _stampingEndTimeLabelText = string.Empty;
         public string StampingEndTimeLabelText
         {
             get { return _stampingEndTimeLabelText; }
-            set
-            {
-                SetProperty(ref _stampingEndTimeLabelText, value);
-            }
+            set { SetProperty(ref _stampingEndTimeLabelText, value); }
         }
 
-        public DelegateCommand StartTimeRegistButtonCommand { get; set; }
-        public DelegateCommand EndTimeRegistButtonCommand { get; set; }
-
-        private string _todayTimecardId;
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="navigationService"></param>
-        /// <param name="pageDialogService"></param>
         public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
-            _pageDialogService = pageDialogService;
+            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            // 画面テキスト
             Title = "Today";
-            StartTimeLabelText = "出勤時間：";
-            EndTimeLabelText = "退勤時間：";
-            StartTimeRegistButtonText = "出勤登録";
-            EndTimeRegistButtonText = "退勤登録";
+            _pageDialogService = pageDialogService;
+        }
 
-            // ボタンイベント
-            StartTimeRegistButtonCommand = new DelegateCommand(RegisterStartTime);
-            EndTimeRegistButtonCommand = new DelegateCommand(RegisterEndTime);
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
+            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             // 当日分の取得
             var realm = Realm.GetInstance();
@@ -96,10 +75,7 @@ namespace SimpleTimecard.ViewModels
             }
         }
 
-        /// <summary>
-        /// 出勤時間の登録
-        /// </summary>
-        private async void RegisterStartTime()
+        public DelegateCommand OnClickStartTimeEntry => new DelegateCommand(async () =>
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "出勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -138,12 +114,9 @@ namespace SimpleTimecard.ViewModels
             }
 
             StampingStartTimeLabelText = entryDateTime.ToString("HH:mm");
-        }
+        });
 
-        /// <summary>
-        /// 退勤時間の登録
-        /// </summary>
-        private async void RegisterEndTime()
+        public DelegateCommand OnClickEndTimeEntry => new DelegateCommand(async () =>
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "退勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -179,6 +152,6 @@ namespace SimpleTimecard.ViewModels
             }
 
             StampingEndTimeLabelText = entryDateTime.ToString("HH:mm");
-        }
+        });
     }
 }
