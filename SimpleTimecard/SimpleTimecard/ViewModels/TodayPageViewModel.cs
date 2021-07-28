@@ -32,7 +32,7 @@ namespace SimpleTimecard.ViewModels
 
         public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
-            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            Logger.Trace();
 
             Title = "Today";
             _pageDialogService = pageDialogService;
@@ -40,14 +40,14 @@ namespace SimpleTimecard.ViewModels
 
         public override void Initialize(INavigationParameters parameters)
         {
+            Logger.Trace();
             base.Initialize(parameters);
-            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
 
         public override void OnAppearing()
         {
+            Logger.Trace();
             base.OnAppearing();
-            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             // 当日分の取得
             var realm = Realm.GetInstance();

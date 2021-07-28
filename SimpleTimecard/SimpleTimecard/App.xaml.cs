@@ -31,28 +31,19 @@ namespace SimpleTimecard
             containerRegistry.RegisterForNavigation<EditPage, EditPageViewModel>();
         }
 
-        /// <summary>
-        /// アプリ起動時
-        /// </summary>
         protected override void OnStart()
         {
-            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            Logger.Trace();
         }
 
-        /// <summary>
-        /// アプリがフォアグラウンドになった時
-        /// </summary>
         protected override void OnResume()
         {
-            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            Logger.Trace();
         }
 
-        /// <summary>
-        /// アプリがバックグラウンドになった時
-        /// </summary>
         protected override void OnSleep()
         {
-            Logger.Debug(this.GetType().Name + ":" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            Logger.Trace();
         }
     }
 }
