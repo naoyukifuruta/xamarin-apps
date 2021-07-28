@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Prism.Commands;
 using Prism.Navigation;
+using SimpleTimecard.Common;
+using SimpleTimecard.Views;
+using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
     public class MainTabbedPageViewModel : ViewModelBase
     {
-        public DelegateCommand SettingButtonCommand { get; set; }
-
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            // ナビゲーションバーの設定ボタン押下時のコマンドを設定
-            SettingButtonCommand = new DelegateCommand(async () =>
-            {
-                await NavigationService.NavigateAsync("SettingPage");
-            });
+            Logger.Trace();
 
             // ナビゲーションタイトルに現在時刻を表示
             new Task(async () =>
@@ -29,5 +25,10 @@ namespace SimpleTimecard.ViewModels
                 }
             }).Start();
         }
+
+        public Command OnClickSetting => new Command(async () =>
+        {
+            await NavigationService.NavigateAsync(nameof(SettingPage));
+        });
     }
 }

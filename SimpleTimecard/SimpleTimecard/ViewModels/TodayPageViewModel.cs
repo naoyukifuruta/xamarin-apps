@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Input;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Realms;
 using SimpleTimecard.Common;
 using SimpleTimecard.Models;
+using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -32,8 +31,6 @@ namespace SimpleTimecard.ViewModels
 
         public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
-            Logger.Trace();
-
             Title = "Today";
             _pageDialogService = pageDialogService;
         }
@@ -76,7 +73,7 @@ namespace SimpleTimecard.ViewModels
             }
         }
 
-        public ICommand OnClickStartTimeEntry => new DelegateCommand(async () =>
+        public Command OnClickStartTimeEntry => new Command(async () =>
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "出勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -84,7 +81,7 @@ namespace SimpleTimecard.ViewModels
                 return;
             }
 
-            // TODO: 更新
+            // TODO: あとでリファクタリングする
 
             var entryDateTime = DateTime.Now;
             var realm = Realm.GetInstance();
@@ -117,7 +114,7 @@ namespace SimpleTimecard.ViewModels
             StampingStartTimeLabelText = entryDateTime.ToString("HH:mm");
         });
 
-        public ICommand OnClickEndTimeEntry => new DelegateCommand(async () =>
+        public Command OnClickEndTimeEntry => new Command(async () =>
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "退勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)

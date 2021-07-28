@@ -15,7 +15,7 @@
                 Title="データベース初期化"
                 TitleAlignment="Center"
                 TitleColor="#CC9900"
-                Command="{Binding InitializedDatabaseCommand}"/>
+                Command="{Binding Path=OnClickInitializedDatabase}"/>
         </sv:Section>
     </sv:SettingsView>
 
