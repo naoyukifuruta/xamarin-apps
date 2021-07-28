@@ -7,12 +7,20 @@
              Title="{Binding Title}">
 
     <StackLayout Orientation="Vertical">
-        <Button Text="追加" HorizontalOptions="FillAndExpand" Margin="8"
-                FontSize="Default" TextColor="Black" BackgroundColor="WhiteSmoke" BorderColor="LightGray" BorderWidth="1"
-                Command="{Binding AddButtonCommand}"/>
-        <ListView ItemsSource="{Binding TimecardHistories}"
-                  SeparatorColor="DarkGray"
-                  BackgroundColor="White">
+        <Button
+            Text="追加"
+            HorizontalOptions="FillAndExpand"
+            Margin="8"
+            FontSize="Default"
+            TextColor="Black"
+            BackgroundColor="WhiteSmoke"
+            BorderColor="LightGray"
+            BorderWidth="1"
+            Command="{Binding AddButtonCommand}"/>
+        <ListView
+            ItemsSource="{Binding TimecardHistories}"
+            SeparatorColor="DarkGray"
+            BackgroundColor="White">
             <ListView.Behaviors>
                 <behaviors:ListViewItemTappedBehavior Command="{Binding CellTappedCommand}" />
             </ListView.Behaviors>
@@ -20,24 +28,39 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="削除" IsDestructive="True" />
+                            <MenuItem
+                                Clicked="OnDelete"
+                                CommandParameter="{Binding .}"
+                                Text="削除"
+                                IsDestructive="True" />
                         </ViewCell.ContextActions>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="16,0,0,0">
-                            <Label Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd ddd}'}"
-                                   TextColor="Black" FontSize="Medium"
-                                   VerticalTextAlignment="Center" HorizontalOptions="Start"/>
-
-                            <Label Text="{Binding StartTimeString}"
-                                   TextColor="Black" FontSize="Medium"
-                                   VerticalTextAlignment="Center" HorizontalOptions="End"/>
-
-                            <Label Text="{Binding EndTimeString}"
-                                   TextColor="Black" FontSize="Medium"
-                                   VerticalTextAlignment="Center" HorizontalOptions="End"/>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand"
+                            Margin="16,0,0,0">
+                            <Label
+                                Text="{Binding StartTime, StringFormat='{0:yyyy/MM/dd ddd}'}"
+                                TextColor="Black"
+                                FontSize="Medium"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="Start"/>
+                            <Label
+                                Text="{Binding StartTimeString}"
+                                TextColor="Black"
+                                FontSize="Medium"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="End"/>
+                            <Label
+                                Text="{Binding EndTimeString}"
+                                TextColor="Black"
+                                FontSize="Medium"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="End"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
+
 </ContentPage>

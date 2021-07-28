@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
-             x:Class="SimpleTimecard.Views.SettingPage"
-             Visual="Material"
-             Title="{Binding Title}">
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
+    x:Class="SimpleTimecard.Views.SettingPage"
+    Visual="Material"
+    Title="{Binding Title}">
 
     <sv:SettingsView HasUnevenRows="true">
-        <sv:Section Title="データベース" FooterText="とりあえず設けているので特にやれることはなし">
-            <sv:ButtonCell Title="データベース初期化" TitleAlignment="Center" TitleColor="#CC9900" Command="{Binding InitializedDatabaseCommand}"/>
+        <sv:Section
+            Title="データベース"
+            FooterText="とりあえず設けているので特にやれることはなし">
+            <sv:ButtonCell
+                Title="データベース初期化"
+                TitleAlignment="Center"
+                TitleColor="#CC9900"
+                Command="{Binding InitializedDatabaseCommand}"/>
         </sv:Section>
     </sv:SettingsView>
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SimpleTimecard.Models;
 using SimpleTimecard.ViewModels;
 using Xamarin.Forms;
