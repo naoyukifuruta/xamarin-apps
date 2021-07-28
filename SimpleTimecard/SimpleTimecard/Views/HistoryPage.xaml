@@ -16,13 +16,13 @@
             BackgroundColor="WhiteSmoke"
             BorderColor="LightGray"
             BorderWidth="1"
-            Command="{Binding AddButtonCommand}"/>
+            Command="{Binding Path=OnClickAdd}"/>
         <ListView
             ItemsSource="{Binding TimecardHistories}"
             SeparatorColor="DarkGray"
             BackgroundColor="White">
             <ListView.Behaviors>
-                <behaviors:ListViewItemTappedBehavior Command="{Binding CellTappedCommand}" />
+                <behaviors:ListViewItemTappedBehavior Command="{Binding Path=OnClickListViewCell}" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
