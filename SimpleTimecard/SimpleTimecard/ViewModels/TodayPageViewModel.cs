@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -75,7 +76,7 @@ namespace SimpleTimecard.ViewModels
             }
         }
 
-        public DelegateCommand OnClickStartTimeEntry => new DelegateCommand(async () =>
+        public ICommand OnClickStartTimeEntry => new DelegateCommand(async () =>
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "出勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -116,7 +117,7 @@ namespace SimpleTimecard.ViewModels
             StampingStartTimeLabelText = entryDateTime.ToString("HH:mm");
         });
 
-        public DelegateCommand OnClickEndTimeEntry => new DelegateCommand(async () =>
+        public ICommand OnClickEndTimeEntry => new DelegateCommand(async () =>
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "退勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
