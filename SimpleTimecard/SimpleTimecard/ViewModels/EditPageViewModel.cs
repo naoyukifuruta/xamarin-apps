@@ -12,30 +12,21 @@ namespace SimpleTimecard.ViewModels
         public DateTime SelectedEntryDate
         {
             get { return _selectedEntryDate; }
-            set
-            {
-                SetProperty(ref _selectedEntryDate, value);
-            }
+            set { SetProperty(ref _selectedEntryDate, value); }
         }
 
         private TimeSpan _selectedStartTime;
         public TimeSpan SelectedStartTime
         {
             get { return _selectedStartTime; }
-            set
-            {
-                SetProperty(ref _selectedStartTime, value);
-            }
+            set { SetProperty(ref _selectedStartTime, value); }
         }
 
         private TimeSpan _selectedEndTime;
         public TimeSpan SelectedEndTime
         {
             get { return _selectedEndTime; }
-            set
-            {
-                SetProperty(ref _selectedEndTime, value);
-            }
+            set { SetProperty(ref _selectedEndTime, value); }
         }
 
         public DelegateCommand UpdateButtonCommand { get; set; }
@@ -45,8 +36,6 @@ namespace SimpleTimecard.ViewModels
 
         public EditPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "編集";
-
             SelectedEntryDate = DateTime.Now;
             SelectedStartTime = new TimeSpan();
             SelectedEndTime = new TimeSpan();
@@ -65,7 +54,7 @@ namespace SimpleTimecard.ViewModels
 
             _timecardId = val.TimecardId;
 
-            SelectedEntryDate = val.StartTime.Value.DateTime;
+            Title = val.StartTime.Value.DateTime.ToString("yyyy/MM/dd ddd");
             SelectedStartTime = TimeSpan.Parse(val.StartTimeString);
             SelectedEndTime = TimeSpan.Parse(val.EndTimeString);
         }

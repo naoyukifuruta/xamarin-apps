@@ -29,6 +29,7 @@
     <None Remove="Common\" />
     <None Remove="AiForms.SettingsView" />
     <None Remove="Interfaces\" />
+    <None Remove="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -37,5 +38,17 @@
     <Folder Include="Behaviors\" />
     <Folder Include="Common\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
