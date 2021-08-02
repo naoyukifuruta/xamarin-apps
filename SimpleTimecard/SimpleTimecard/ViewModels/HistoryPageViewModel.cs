@@ -35,6 +35,7 @@ namespace SimpleTimecard.ViewModels
         public Command OnClickAdd => new Command(async () =>
         {
             await NavigationService.NavigateAsync(nameof(AddPage));
+            //await NavigationService.NavigateAsync(nameof(AddPage), useModalNavigation: true);
         });
 
         public Command OnClickListViewCell => new Command<Timecard>(async (timecard) =>

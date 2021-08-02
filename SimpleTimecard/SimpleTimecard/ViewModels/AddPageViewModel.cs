@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using Realms;
 using SimpleTimecard.Models;
+using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -12,34 +13,22 @@ namespace SimpleTimecard.ViewModels
         public DateTime SelectedEntryDate
         {
             get { return _selectedEntryDate; }
-            set
-            {
-                SetProperty(ref _selectedEntryDate, value);
-            }
+            set { SetProperty(ref _selectedEntryDate, value); }
         }
 
         private TimeSpan _selectedStartTime;
         public TimeSpan SelectedStartTime
         {
             get { return _selectedStartTime; }
-            set
-            {
-                SetProperty(ref _selectedStartTime, value);
-            }
+            set { SetProperty(ref _selectedStartTime, value); }
         }
 
         private TimeSpan _selectedEndTime;
         public TimeSpan SelectedEndTime
         {
             get { return _selectedEndTime; }
-            set
-            {
-                SetProperty(ref _selectedEndTime, value);
-            }
+            set { SetProperty(ref _selectedEndTime, value); }
         }
-
-        public DelegateCommand EntryButtonCommand { get; set; }
-        public DelegateCommand CancelButtonCommand { get; set; }
 
         public AddPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -48,12 +37,9 @@ namespace SimpleTimecard.ViewModels
             SelectedEntryDate = DateTime.Now;
             SelectedStartTime = new TimeSpan();
             SelectedEndTime = new TimeSpan();
-
-            EntryButtonCommand = new DelegateCommand(Entry);
-            CancelButtonCommand = new DelegateCommand(Cancel);
         }
 
-        private async void Entry()
+        public Command OnClickEntry => new Command(async () =>
         {
             var realm = Realm.GetInstance();
             realm.Write(() =>
@@ -68,11 +54,11 @@ namespace SimpleTimecard.ViewModels
             });
 
             await base.NavigationService.GoBackAsync();
-        }
+        });
 
-        private async void Cancel()
+        public Command OnClickCancel => new Command(async () =>
         {
             await base.NavigationService.GoBackAsync();
-        }
+        });
     }
 }

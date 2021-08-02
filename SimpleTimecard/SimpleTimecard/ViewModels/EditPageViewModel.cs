@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using Realms;
 using SimpleTimecard.Models;
+using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -29,9 +30,6 @@ namespace SimpleTimecard.ViewModels
             set { SetProperty(ref _selectedEndTime, value); }
         }
 
-        public DelegateCommand UpdateButtonCommand { get; set; }
-        public DelegateCommand CancelButtonCommand { get; set; }
-
         private string _timecardId = string.Empty;
 
         public EditPageViewModel(INavigationService navigationService) : base(navigationService)
@@ -39,18 +37,16 @@ namespace SimpleTimecard.ViewModels
             SelectedEntryDate = DateTime.Now;
             SelectedStartTime = new TimeSpan();
             SelectedEndTime = new TimeSpan();
-
-            UpdateButtonCommand = new DelegateCommand(Update);
-            CancelButtonCommand = new DelegateCommand(Cancel);
         }
 
+        // 画面遷移時
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             var val = parameters[nameof(Timecard)] as Timecard;
             if (val == null)
             {
                 throw new ArgumentException(nameof(Timecard));
-            }
+            } 
 
             _timecardId = val.TimecardId;
 
@@ -59,26 +55,43 @@ namespace SimpleTimecard.ViewModels
             SelectedEndTime = TimeSpan.Parse(val.EndTimeString);
         }
 
-        private async void Update()
+        /// <summary>
+        /// 更新
+        /// </summary>
+        public Command OnClickUpdate => new Command(async () =>
         {
             var realm = Realm.GetInstance();
 
-            // 更新
             var timecard = realm.Find<Timecard>(_timecardId);
             realm.Write(() => {
                 timecard.StartTime = SelectedEntryDate;
-                timecard.StartTimeString = string.Format($"{SelectedStartTime.Hours.ToString("D2")}:{SelectedStartTime.Minutes.ToString("D2")}");
+                timecard.StartTimeString = GetInputStartTime();
                 timecard.EndTime = SelectedEntryDate;
-                timecard.EndTimeString = string.Format($"{SelectedEndTime.Hours.ToString("D2")}:{SelectedEndTime.Minutes.ToString("D2")}");
+                timecard.EndTimeString = GetInputEndTime();
                 realm.Add<Timecard>(timecard, update: true);
             });
 
             await base.NavigationService.GoBackAsync();
-        }
+        });
 
-        private async void Cancel()
+        /// <summary>
+        /// キャンセル（前の画面に戻る）
+        /// </summary>
+        public Command OnClickCancel => new Command(async () =>
         {
             await base.NavigationService.GoBackAsync();
+        });
+
+        // 出勤時間を取得(HH:mm)
+        private string GetInputStartTime()
+        {
+            return string.Format($"{SelectedStartTime.Hours.ToString("D2")}:{SelectedStartTime.Minutes.ToString("D2")}");
+        }
+
+        // 退勤時間を取得(HH:mm)
+        private string GetInputEndTime()
+        {
+            return string.Format($"{SelectedEndTime.Hours.ToString("D2")}:{SelectedEndTime.Minutes.ToString("D2")}");
         }
     }
 }

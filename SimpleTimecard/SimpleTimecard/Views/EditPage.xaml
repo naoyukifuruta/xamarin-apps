@@ -41,7 +41,7 @@
                 BackgroundColor="WhiteSmoke"
                 BorderColor="LightGray"
                 BorderWidth="1"
-                Command="{Binding CancelButtonCommand}"/>
+                Command="{Binding Path=OnClickCancel}"/>
             <Button
                 Text="{x:Static resources:AppResources.ButtonUpdate}"
                 WidthRequest="120"
@@ -51,7 +51,7 @@
                 BackgroundColor="WhiteSmoke"
                 BorderColor="LightGray"
                 BorderWidth="1"
-                Command="{Binding UpdateButtonCommand}"/>
+                Command="{Binding Path=OnClickUpdate}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

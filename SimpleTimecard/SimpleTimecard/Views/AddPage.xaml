@@ -53,7 +53,7 @@
                 BackgroundColor="WhiteSmoke"
                 BorderColor="LightGray"
                 BorderWidth="1"
-                Command="{Binding CancelButtonCommand}"/>
+                Command="{Binding Path=OnClickEntry}"/>
             <Button
                 Text="登録"
                 WidthRequest="120"
@@ -63,7 +63,7 @@
                 BackgroundColor="WhiteSmoke"
                 BorderColor="LightGray"
                 BorderWidth="1"
-                Command="{Binding EntryButtonCommand}"/>
+                Command="{Binding Path=OnClickCancel}"/>
         </StackLayout>
     </StackLayout>
 
