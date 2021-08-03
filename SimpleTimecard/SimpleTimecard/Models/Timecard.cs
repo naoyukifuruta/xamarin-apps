@@ -8,9 +8,7 @@ namespace SimpleTimecard.Models
         [PrimaryKey]
         public string TimecardId { get; set; } = Guid.NewGuid().ToString();
 
-        public DateTimeOffset? StartTime { get; set; }
-
-        public DateTimeOffset? EndTime { get; set; }
+        public DateTimeOffset? EntryDate { get; set; }
 
         public string StartTimeString { get; set; }
 

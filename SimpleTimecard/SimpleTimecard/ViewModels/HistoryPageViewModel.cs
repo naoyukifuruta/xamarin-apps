@@ -2,6 +2,7 @@
 using System.Linq;
 using Prism.Navigation;
 using Realms;
+using SimpleTimecard.Interfaces;
 using SimpleTimecard.Models;
 using SimpleTimecard.Views;
 using Xamarin.Forms;
@@ -59,6 +60,8 @@ namespace SimpleTimecard.ViewModels
             // 再取得
             var allTimecards = realm.All<Timecard>().ToList();
             TimecardHistories = allTimecards;
+
+            DependencyService.Get<IToast>().Show("削除しました。");
         }
     }
 }

@@ -49,20 +49,21 @@ namespace SimpleTimecard.ViewModels
             // 当日分の取得
             var realm = Realm.GetInstance();
             var allTimecards = realm.All<Timecard>().ToList();
+
             // TODO: ここの処理はあとで見直したい
-            if (allTimecards.Where(x => x.StartTime.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).Any())
+            if (allTimecards.Where(x => x.EntryDate.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).Any())
             {
-                var todayTimecard = allTimecards.Where(x => x.StartTime.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).First();
+                var todayTimecard = allTimecards.Where(x => x.EntryDate.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).First();
                 _todayTimecardId = todayTimecard.TimecardId;
 
-                // 登録がある場合は画面に表示
-                if (todayTimecard.StartTime.HasValue)
+                if (!string.IsNullOrEmpty(todayTimecard.StartTimeString))
                 {
-                    StampingStartTimeLabelText = todayTimecard.StartTime.Value.ToLocalTime().ToString("HH:mm");
+                    StampingStartTimeLabelText = todayTimecard.StartTimeString;
                 }
-                if (todayTimecard.EndTime.HasValue)
+
+                if (!string.IsNullOrEmpty(todayTimecard.EndTimeString))
                 {
-                    StampingEndTimeLabelText = todayTimecard.EndTime.Value.ToLocalTime().ToString("HH:mm");
+                    StampingEndTimeLabelText = todayTimecard.EndTimeString;
                 }
             }
             else
@@ -83,7 +84,7 @@ namespace SimpleTimecard.ViewModels
 
             // TODO: あとでリファクタリングする
 
-            var entryDateTime = DateTime.Now.ToLocalTime();
+            var entryDateTime = DateTime.Now;
             var realm = Realm.GetInstance();
 
             if (string.IsNullOrEmpty(_todayTimecardId))
@@ -93,7 +94,7 @@ namespace SimpleTimecard.ViewModels
                 {
                     var addedTimecard = realm.Add<Timecard>(new Timecard()
                     {
-                        StartTime = entryDateTime,
+                        EntryDate = entryDateTime,
                         StartTimeString = entryDateTime.ToLocalTime().ToString("HH:mm"),
                     });
 
@@ -105,13 +106,12 @@ namespace SimpleTimecard.ViewModels
                 // 更新
                 var timecard = realm.Find<Timecard>(_todayTimecardId);
                 realm.Write(() => {
-                    timecard.StartTime = entryDateTime;
                     timecard.StartTimeString = entryDateTime.ToLocalTime().ToString("HH:mm");
                     realm.Add<Timecard>(timecard, update: true);
                 });
             }
 
-            StampingStartTimeLabelText = entryDateTime.ToString("HH:mm");
+            StampingStartTimeLabelText = entryDateTime.ToLocalTime().ToString("HH:mm");
         });
 
         public Command OnClickEndTimeEntry => new Command(async () =>
@@ -122,7 +122,7 @@ namespace SimpleTimecard.ViewModels
                 return;
             }
 
-            var entryDateTime = DateTime.Now.ToLocalTime();
+            var entryDateTime = DateTime.Now;
             var realm = Realm.GetInstance();
 
             if (string.IsNullOrEmpty(_todayTimecardId))
@@ -132,7 +132,7 @@ namespace SimpleTimecard.ViewModels
                 {
                     var addedTimecard = realm.Add<Timecard>(new Timecard()
                     {
-                        EndTime = entryDateTime,
+                        EntryDate = entryDateTime,
                         EndTimeString = entryDateTime.ToLocalTime().ToString("HH:mm"),
                     });
                     _todayTimecardId = addedTimecard.TimecardId;
@@ -143,13 +143,12 @@ namespace SimpleTimecard.ViewModels
                 // 更新
                 var timecard = realm.Find<Timecard>(_todayTimecardId);
                 realm.Write(() => {
-                    timecard.EndTime = entryDateTime;
                     timecard.EndTimeString = entryDateTime.ToLocalTime().ToString("HH:mm");
                     realm.Add<Timecard>(timecard, update: true);
                 });
             }
 
-            StampingEndTimeLabelText = entryDateTime.ToString("HH:mm");
+            StampingEndTimeLabelText = entryDateTime.ToLocalTime().ToString("HH:mm");
         });
     }
 }
