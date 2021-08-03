@@ -83,7 +83,7 @@ namespace SimpleTimecard.ViewModels
 
             // TODO: あとでリファクタリングする
 
-            var entryDateTime = DateTime.Now;
+            var entryDateTime = DateTime.Now.ToLocalTime();
             var realm = Realm.GetInstance();
 
             if (string.IsNullOrEmpty(_todayTimecardId))
@@ -122,7 +122,7 @@ namespace SimpleTimecard.ViewModels
                 return;
             }
 
-            var entryDateTime = DateTime.Now;
+            var entryDateTime = DateTime.Now.ToLocalTime();
             var realm = Realm.GetInstance();
 
             if (string.IsNullOrEmpty(_todayTimecardId))

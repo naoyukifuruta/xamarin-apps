@@ -1,5 +1,4 @@
 ﻿using System;
-using Prism.Commands;
 using Prism.Navigation;
 using Realms;
 using SimpleTimecard.Models;
@@ -9,6 +8,8 @@ namespace SimpleTimecard.ViewModels
 {
     public class EditPageViewModel : ViewModelBase
     {
+        private string _timecardId = string.Empty;
+
         private DateTime _selectedEntryDate;
         public DateTime SelectedEntryDate
         {
@@ -29,8 +30,6 @@ namespace SimpleTimecard.ViewModels
             get { return _selectedEndTime; }
             set { SetProperty(ref _selectedEndTime, value); }
         }
-
-        private string _timecardId = string.Empty;
 
         public EditPageViewModel(INavigationService navigationService) : base(navigationService)
         {
