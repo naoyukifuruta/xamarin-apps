@@ -33,7 +33,7 @@ namespace SimpleTimecard.ViewModels
 
         public EditPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            SelectedEntryDate = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
+            SelectedEntryDate = DateTime.Now;
             SelectedStartTime = new TimeSpan();
             SelectedEndTime = new TimeSpan();
         }
@@ -49,7 +49,7 @@ namespace SimpleTimecard.ViewModels
 
             _timecardId = val.TimecardId;
 
-            Title = val.EntryDate.HasValue ? val.EntryDate.Value.DateTime.ToString("yyyy/MM/dd ddd") : string.Empty;
+            Title = val.EntryDate.HasValue ? val.EntryDate.Value.ToLocalTime().DateTime.ToString("yyyy/MM/dd ddd") : string.Empty;
             SelectedStartTime = TimeSpan.Parse(val.StartTimeString);
             SelectedEndTime = TimeSpan.Parse(val.EndTimeString);
         }
@@ -63,7 +63,6 @@ namespace SimpleTimecard.ViewModels
 
             var timecard = realm.Find<Timecard>(_timecardId);
             realm.Write(() => {
-                timecard.EntryDate = DateTime.SpecifyKind(SelectedEntryDate, DateTimeKind.Local);
                 timecard.StartTimeString = GetInputStartTime();
                 timecard.EndTimeString = GetInputEndTime();
                 realm.Add<Timecard>(timecard, update: true);

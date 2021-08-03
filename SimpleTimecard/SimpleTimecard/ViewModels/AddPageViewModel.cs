@@ -34,7 +34,7 @@ namespace SimpleTimecard.ViewModels
         {
             Title = "追加";
 
-            SelectedEntryDate = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Local);
+            SelectedEntryDate = DateTime.Now;
             SelectedStartTime = new TimeSpan();
             SelectedEndTime = new TimeSpan();
         }
@@ -46,7 +46,7 @@ namespace SimpleTimecard.ViewModels
             {
                 var addedTimecard = realm.Add<Timecard>(new Timecard()
                 {
-                    EntryDate = DateTime.SpecifyKind(SelectedEntryDate, DateTimeKind.Local),
+                    EntryDate = SelectedEntryDate,
                     StartTimeString = string.Format($"{SelectedStartTime.Hours.ToString("D2")}:{SelectedStartTime.Minutes.ToString("D2")}"),
                     EndTimeString = string.Format($"{SelectedEndTime.Hours.ToString("D2")}:{SelectedEndTime.Minutes.ToString("D2")}"),
                 });

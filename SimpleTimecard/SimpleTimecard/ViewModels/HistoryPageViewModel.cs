@@ -30,7 +30,7 @@ namespace SimpleTimecard.ViewModels
             var realm = Realm.GetInstance();
             var allTimecards = realm.All<Timecard>().ToList();
 
-            TimecardHistories = allTimecards;
+            TimecardHistories = allTimecards.OrderBy(x => x.EntryDate).ToList();
         }
 
         public Command OnClickAdd => new Command(async () =>
