@@ -10,15 +10,15 @@
 
     <StackLayout Orientation="Vertical">
         <Button
-            Text="追加"
+            Text="{x:Static resources:AppResources.ButtonAdd}"
+            Command="{Binding Path=OnClickAdd}"
             HorizontalOptions="FillAndExpand"
             Margin="8"
             FontSize="Default"
             TextColor="Black"
             BackgroundColor="WhiteSmoke"
             BorderColor="LightGray"
-            BorderWidth="1"
-            Command="{Binding Path=OnClickAdd}"/>
+            BorderWidth="1"/>
         <ListView
             ItemsSource="{Binding TimecardHistories}"
             SeparatorColor="DarkGray"

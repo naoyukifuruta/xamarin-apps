@@ -77,6 +77,12 @@ namespace SimpleTimecard.Resources {
             }
         }
         
+        internal static string ButtonAdd {
+            get {
+                return ResourceManager.GetString("ButtonAdd", resourceCulture);
+            }
+        }
+        
         internal static string ButtonRegistStartTime {
             get {
                 return ResourceManager.GetString("ButtonRegistStartTime", resourceCulture);

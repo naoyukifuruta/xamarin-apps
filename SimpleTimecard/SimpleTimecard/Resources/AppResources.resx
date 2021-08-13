@@ -28,6 +28,9 @@
 	<data name="ButtonSetting" xml:space="preserve">
 		<value>設定</value>
 	</data>
+	<data name="ButtonAdd" xml:space="preserve">
+		<value>追加</value>
+	</data>
 	<data name="ButtonRegistStartTime" xml:space="preserve">
 		<value>出勤登録</value>
 	</data>
