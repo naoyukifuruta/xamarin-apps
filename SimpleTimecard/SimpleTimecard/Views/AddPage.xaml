@@ -10,7 +10,7 @@
     <StackLayout Padding="32">
         <StackLayout Orientation="Horizontal">
             <Label
-                Text="登録日付"
+                Text="{x:Static resources:AppResources.LabelRegistDate}"
                 FontSize="Medium"
                 VerticalTextAlignment="Center"
                 Margin="0,0,8,0"/>
@@ -23,7 +23,7 @@
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label
-                Text="出勤時刻"
+                Text="{x:Static resources:AppResources.LabelStartTime}"
                 FontSize="Medium"
                 VerticalTextAlignment="Center"
                 Margin="0,0,8,0"/>
@@ -33,7 +33,7 @@
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label
-                Text="退勤時刻"
+                Text="{x:Static resources:AppResources.LabelEndTime}"
                 FontSize="Medium"
                 VerticalTextAlignment="Center"
                 Margin="0,0,8,0"/>
@@ -46,25 +46,25 @@
             HorizontalOptions="CenterAndExpand"
             Margin="0,48,0,0">
             <Button
-                Text="キャンセル"
+                Text="{x:Static resources:AppResources.ButtonCancel}"
+                Command="{Binding Path=OnClickCancel}"
                 WidthRequest="120"
                 HeightRequest="40"
                 FontSize="Default"
                 TextColor="Black"
                 BackgroundColor="WhiteSmoke"
                 BorderColor="LightGray"
-                BorderWidth="1"
-                Command="{Binding Path=OnClickCancel}"/>
+                BorderWidth="1"/>
             <Button
-                Text="登録"
+                Text="{x:Static resources:AppResources.ButtonRegist}"
+                Command="{Binding Path=OnClickEntry}"
                 WidthRequest="120"
                 HeightRequest="40"
                 FontSize="Default"
                 TextColor="Black"
                 BackgroundColor="WhiteSmoke"
                 BorderColor="LightGray"
-                BorderWidth="1"
-                Command="{Binding Path=OnClickEntry}"/>
+                BorderWidth="1"/>
         </StackLayout>
     </StackLayout>
 

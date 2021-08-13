@@ -10,13 +10,17 @@
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem
-            Text="設定"
+            Text="{x:Static resources:AppResources.ButtonSetting}"
             IconImageSource="settings.png"
             Command="{Binding Path=OnClickSetting}"/>
     </TabbedPage.ToolbarItems>
 
-    <views:TodayPage Title="今日" IconImageSource="today.png"/>
-    <views:HistoryPage Title="履歴" IconImageSource="schedule.png"/>
+    <views:TodayPage
+        Title="{x:Static resources:AppResources.LabelToday}"
+        IconImageSource="today.png"/>
+    <views:HistoryPage
+        Title="{x:Static resources:AppResources.LabelList}"
+        IconImageSource="schedule.png"/>
 
 </TabbedPage>
 

@@ -53,9 +53,51 @@ namespace SimpleTimecard.Resources {
             }
         }
         
+        internal static string ButtonRegist {
+            get {
+                return ResourceManager.GetString("ButtonRegist", resourceCulture);
+            }
+        }
+        
         internal static string ButtonUpdate {
             get {
                 return ResourceManager.GetString("ButtonUpdate", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonDelete {
+            get {
+                return ResourceManager.GetString("ButtonDelete", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonSetting {
+            get {
+                return ResourceManager.GetString("ButtonSetting", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonRegistStartTime {
+            get {
+                return ResourceManager.GetString("ButtonRegistStartTime", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonRegistEndTime {
+            get {
+                return ResourceManager.GetString("ButtonRegistEndTime", resourceCulture);
+            }
+        }
+        
+        internal static string LabelToday {
+            get {
+                return ResourceManager.GetString("LabelToday", resourceCulture);
+            }
+        }
+        
+        internal static string LabelList {
+            get {
+                return ResourceManager.GetString("LabelList", resourceCulture);
             }
         }
         
@@ -68,6 +110,24 @@ namespace SimpleTimecard.Resources {
         internal static string LabelEndTime {
             get {
                 return ResourceManager.GetString("LabelEndTime", resourceCulture);
+            }
+        }
+        
+        internal static string LabelStartTimeColon {
+            get {
+                return ResourceManager.GetString("LabelStartTimeColon", resourceCulture);
+            }
+        }
+        
+        internal static string LabelEndTimeColon {
+            get {
+                return ResourceManager.GetString("LabelEndTimeColon", resourceCulture);
+            }
+        }
+        
+        internal static string LabelRegistDate {
+            get {
+                return ResourceManager.GetString("LabelRegistDate", resourceCulture);
             }
         }
     }

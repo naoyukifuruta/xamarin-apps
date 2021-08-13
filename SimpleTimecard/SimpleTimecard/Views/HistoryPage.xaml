@@ -31,9 +31,9 @@
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem
+                                Text="{x:Static resources:AppResources.ButtonDelete}"
                                 Clicked="OnDelete"
                                 CommandParameter="{Binding .}"
-                                Text="削除"
                                 IsDestructive="True" />
                         </ViewCell.ContextActions>
                         <StackLayout
