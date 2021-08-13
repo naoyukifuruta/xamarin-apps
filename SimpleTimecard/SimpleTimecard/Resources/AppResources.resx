@@ -37,6 +37,9 @@
 	<data name="ButtonRegistEndTime" xml:space="preserve">
 		<value>退勤登録</value>
 	</data>
+	<data name="ButtonClose" xml:space="preserve">
+		<value>閉じる</value>
+	</data>
 	<!-- Label Text -->
 	<data name="LabelToday" xml:space="preserve">
 		<value>今日</value>

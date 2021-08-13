@@ -3,9 +3,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
+    xmlns:resources="clr-namespace:SimpleTimecard.Resources;assembly=SimpleTimecard"
     x:Class="SimpleTimecard.Views.SettingPage"
     Visual="Material"
     Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="{x:Static resources:AppResources.ButtonClose}"
+            Command="{Binding Path=OnClickClose}"/>
+    </ContentPage.ToolbarItems>
 
     <sv:SettingsView HasUnevenRows="true">
         <sv:Section

@@ -28,7 +28,7 @@ namespace SimpleTimecard.ViewModels
 
         public Command OnClickSetting => new Command(async () =>
         {
-            await NavigationService.NavigateAsync(nameof(SettingPage));
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(SettingPage), useModalNavigation: true);
         });
     }
 }

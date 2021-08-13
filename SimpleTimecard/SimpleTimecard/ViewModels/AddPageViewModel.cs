@@ -52,12 +52,12 @@ namespace SimpleTimecard.ViewModels
                 });
             });
 
-            await base.NavigationService.GoBackAsync();
+            await base.NavigationService.GoBackAsync(useModalNavigation: true);
         });
 
         public Command OnClickCancel => new Command(async () =>
         {
-            await base.NavigationService.GoBackAsync();
+            await base.NavigationService.GoBackAsync(useModalNavigation: true);
         });
     }
 }

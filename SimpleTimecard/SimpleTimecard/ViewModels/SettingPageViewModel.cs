@@ -39,5 +39,10 @@ namespace SimpleTimecard.ViewModels
 
             DependencyService.Get<IToast>().Show("データを全削除しました。");
         });
+
+        public Command OnClickClose => new Command(async () =>
+        {
+            await base.NavigationService.GoBackAsync(useModalNavigation: true);
+        });
     }
 }

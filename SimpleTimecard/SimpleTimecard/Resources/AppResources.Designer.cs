@@ -95,6 +95,12 @@ namespace SimpleTimecard.Resources {
             }
         }
         
+        internal static string ButtonClose {
+            get {
+                return ResourceManager.GetString("ButtonClose", resourceCulture);
+            }
+        }
+        
         internal static string LabelToday {
             get {
                 return ResourceManager.GetString("LabelToday", resourceCulture);

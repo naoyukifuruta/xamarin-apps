@@ -35,8 +35,7 @@ namespace SimpleTimecard.ViewModels
 
         public Command OnClickAdd => new Command(async () =>
         {
-            await NavigationService.NavigateAsync(nameof(AddPage));
-            //await NavigationService.NavigateAsync(nameof(AddPage), useModalNavigation: true);
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddPage), useModalNavigation: true);
         });
 
         public Command OnClickListViewCell => new Command<Timecard>(async (timecard) =>
@@ -47,7 +46,6 @@ namespace SimpleTimecard.ViewModels
             await NavigationService.NavigateAsync(nameof(EditPage), param);
         });
 
-        // TODO: bindできるかも？あとで試す
         public void DeleteTimecard(string timecardId)
         {
             // 削除
