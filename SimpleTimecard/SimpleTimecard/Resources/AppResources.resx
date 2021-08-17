@@ -44,8 +44,8 @@
 	<data name="LabelToday" xml:space="preserve">
 		<value>今日</value>
 	</data>
-	<data name="LabelList" xml:space="preserve">
-		<value>一覧</value>
+	<data name="LabelHistory" xml:space="preserve">
+		<value>履歴</value>
 	</data>
 	<data name="LabelStartTime" xml:space="preserve">
 		<value>出勤時間</value>

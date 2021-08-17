@@ -107,9 +107,9 @@ namespace SimpleTimecard.Resources {
             }
         }
         
-        internal static string LabelList {
+        internal static string LabelHistory {
             get {
-                return ResourceManager.GetString("LabelList", resourceCulture);
+                return ResourceManager.GetString("LabelHistory", resourceCulture);
             }
         }
         

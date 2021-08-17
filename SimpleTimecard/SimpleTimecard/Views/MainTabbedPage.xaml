@@ -19,7 +19,7 @@
         Title="{x:Static resources:AppResources.LabelToday}"
         IconImageSource="today.png"/>
     <views:HistoryPage
-        Title="{x:Static resources:AppResources.LabelList}"
+        Title="{x:Static resources:AppResources.LabelHistory}"
         IconImageSource="schedule.png"/>
 
 </TabbedPage>
