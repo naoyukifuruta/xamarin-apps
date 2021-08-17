@@ -39,7 +39,7 @@
                         <StackLayout
                             Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand"
-                            Margin="16,0,0,0">
+                            Margin="24,0,0,0">
                             <Label
                                 Text="{Binding Path=EntryDate.LocalDateTime, StringFormat='{0:yyyy/MM/dd ddd}'}"
                                 TextColor="Black"

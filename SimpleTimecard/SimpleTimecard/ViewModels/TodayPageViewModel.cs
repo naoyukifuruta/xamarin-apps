@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Prism.Navigation;
 using Prism.Services;
 using Realms;
@@ -29,10 +30,29 @@ namespace SimpleTimecard.ViewModels
             set { SetProperty(ref _stampingEndTimeLabelText, value); }
         }
 
+        private string _nowDateTimeString;
+        public string NowDateTimeString
+        {
+            get { return _nowDateTimeString; }
+            set { SetProperty(ref _nowDateTimeString, value); }
+        }
+
         public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
             Title = "Today";
             _pageDialogService = pageDialogService;
+
+            // 現在日時
+            new Task(async () =>
+            {
+                while (true)
+                {
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        NowDateTimeString = DateTime.Now.ToString("yyyy/MM/dd ddd HH:mm:ss")
+                    );
+                    await Task.Delay(1000);
+                }
+            }).Start();
         }
 
         public override void Initialize(INavigationParameters parameters)

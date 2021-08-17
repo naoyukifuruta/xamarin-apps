@@ -16,56 +16,68 @@
             <StackLayout
                 Orientation="Vertical"
                 HorizontalOptions="Center"
-                WidthRequest="160">
+                WidthRequest="320">
+                <Label
+                    Text="{Binding NowDateTimeString}"
+                    TextColor="Black"
+                    FontSize="Large"
+                    HorizontalOptions="Center"/>
                 <StackLayout
                     Orientation="Horizontal"
-                    Margin="0,32,0,0">
+                    Margin="48,64,0,0">
                     <Label
                         Text="{x:Static resources:AppResources.LabelStartTimeColon}"
                         TextColor="Black"
-                        FontSize="Medium"/>
+                        FontSize="Large"/>
                     <Label
                         Text="{Binding StampingStartTimeLabelText}"
                         TextColor="Black"
-                        FontSize="Medium"/>
+                        FontSize="Large"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Margin="48,0,0,0">
                     <Label
                         Text="{x:Static resources:AppResources.LabelEndTimeColon}"
                         TextColor="Black"
-                        FontSize="Medium"/>
+                        FontSize="Large"/>
                     <Label
                         Text="{Binding StampingEndTimeLabelText}"
                         TextColor="Black"
-                        FontSize="Medium"/>
+                        FontSize="Large"/>
                 </StackLayout>
             </StackLayout>
             <StackLayout
                 Orientation="Horizontal"
-                Margin="0,48,0,0"
+                Margin="0,64,0,0"
                 HorizontalOptions="Center">
                 <Button
                     Text="{x:Static resources:AppResources.ButtonRegistStartTime}"
                     Command="{Binding Path=OnClickStartTimeEntry}"
                     HorizontalOptions="StartAndExpand"
-                    FontSize="Default"
+                    FontSize="Medium"
                     TextColor="Black"
+                    FontAttributes="Bold"
                     BackgroundColor="WhiteSmoke"
                     BorderColor="LightGray"
                     BorderWidth="1"
-                    WidthRequest="120"
-                    HeightRequest="40"/>
+                    WidthRequest="128"
+                    HeightRequest="56"/>
+                <Label
+                    Text=""
+                    Margin="16,0,0,0"/>
                 <Button
                     Text="{x:Static resources:AppResources.ButtonRegistEndTime}"
                     Command="{Binding Path=OnClickEndTimeEntry}"
                     HorizontalOptions="EndAndExpand"
-                    FontSize="Default"
+                    FontSize="Medium"
                     TextColor="Black"
+                    FontAttributes="Bold"
                     BackgroundColor="WhiteSmoke"
                     BorderColor="LightGray"
                     BorderWidth="1"
-                    WidthRequest="120"
-                    HeightRequest="40"/>
+                    WidthRequest="128"
+                    HeightRequest="56"/>
             </StackLayout>
         </StackLayout>
     </StackLayout>
