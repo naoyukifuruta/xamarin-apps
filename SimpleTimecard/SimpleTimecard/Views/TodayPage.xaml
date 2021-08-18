@@ -20,7 +20,7 @@
                 HorizontalOptions="Center"
                 WidthRequest="320">
                 <Label
-                    Text="{Binding NowDateTimeString}"
+                    Text="{Binding NowDateTime.Value}"
                     TextColor="Black"
                     FontSize="Large"
                     HorizontalOptions="Center"/>

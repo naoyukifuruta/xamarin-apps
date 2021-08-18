@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Prism.Navigation;
 using Prism.Services;
+using Reactive.Bindings;
 using Realms;
 using SimpleTimecard.Common;
 using SimpleTimecard.Models;
@@ -30,12 +31,7 @@ namespace SimpleTimecard.ViewModels
             set { SetProperty(ref _stampingEndTimeLabelText, value); }
         }
 
-        private string _nowDateTimeString;
-        public string NowDateTimeString
-        {
-            get { return _nowDateTimeString; }
-            set { SetProperty(ref _nowDateTimeString, value); }
-        }
+        public ReactiveProperty<string> NowDateTime { get; set; } = new ReactiveProperty<string>();
 
         public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
@@ -48,7 +44,7 @@ namespace SimpleTimecard.ViewModels
                 while (true)
                 {
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-                        NowDateTimeString = DateTime.Now.ToString("yyyy/MM/dd ddd HH:mm:ss")
+                        NowDateTime.Value = DateTime.Now.ToString("yyyy/MM/dd ddd HH:mm:ss")
                     );
                     await Task.Delay(1000);
                 }
