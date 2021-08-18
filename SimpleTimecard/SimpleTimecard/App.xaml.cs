@@ -1,7 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
 using SimpleTimecard.Common;
-using SimpleTimecard.ViewModels;
 using SimpleTimecard.Views;
 using Xamarin.Forms;
 
@@ -23,12 +22,12 @@ namespace SimpleTimecard
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
-            containerRegistry.RegisterForNavigation<TodayPage, TodayPageViewModel>();
-            containerRegistry.RegisterForNavigation<HistoryPage, HistoryPageViewModel>();
-            containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddPage, AddPageViewModel>();
-            containerRegistry.RegisterForNavigation<EditPage, EditPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainTabbedPage>();
+            containerRegistry.RegisterForNavigation<TodayPage>();
+            containerRegistry.RegisterForNavigation<HistoryPage>();
+            containerRegistry.RegisterForNavigation<SettingPage>();
+            containerRegistry.RegisterForNavigation<AddPage>();
+            containerRegistry.RegisterForNavigation<EditPage>();
         }
 
         protected override void OnStart()
