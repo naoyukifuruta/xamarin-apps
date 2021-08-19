@@ -32,7 +32,7 @@
                         TextColor="Black"
                         FontSize="Large"/>
                     <Label
-                        Text="{Binding StampingStartTimeLabelText}"
+                        Text="{Binding StampingStartTime.Value}"
                         TextColor="Black"
                         FontSize="Large"/>
                 </StackLayout>
@@ -44,7 +44,7 @@
                         TextColor="Black"
                         FontSize="Large"/>
                     <Label
-                        Text="{Binding StampingEndTimeLabelText}"
+                        Text="{Binding StampingEndTime.Value}"
                         TextColor="Black"
                         FontSize="Large"/>
                 </StackLayout>
@@ -55,7 +55,7 @@
                 HorizontalOptions="Center">
                 <Button
                     Text="{x:Static resources:AppResources.ButtonRegistStartTime}"
-                    Command="{Binding Path=OnClickStartTimeEntry}"
+                    Command="{Binding RegisterStartTimeCommand}"
                     HorizontalOptions="StartAndExpand"
                     FontSize="Medium"
                     TextColor="Black"
@@ -70,7 +70,7 @@
                     Margin="16,0,0,0"/>
                 <Button
                     Text="{x:Static resources:AppResources.ButtonRegistEndTime}"
-                    Command="{Binding Path=OnClickEndTimeEntry}"
+                    Command="{Binding RegisterEndTimeCommand}"
                     HorizontalOptions="EndAndExpand"
                     FontSize="Medium"
                     TextColor="Black"

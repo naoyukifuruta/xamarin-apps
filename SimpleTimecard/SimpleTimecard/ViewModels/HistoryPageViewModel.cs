@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Prism.Navigation;
+using Reactive.Bindings;
 using Realms;
 using SimpleTimecard.Interfaces;
 using SimpleTimecard.Models;
@@ -11,16 +13,17 @@ namespace SimpleTimecard.ViewModels
 {
     public class HistoryPageViewModel : ViewModelBase
     {
-        private List<Timecard> _timecardHistories;
-        public List<Timecard> TimecardHistories
-        {
-            get { return _timecardHistories; }
-            set { SetProperty(ref this._timecardHistories, value); }
-        }
+        public ReactiveProperty<List<Timecard>> TimecardHistories { get; } = new ReactiveProperty<List<Timecard>>();
+
+        public AsyncReactiveCommand NavigateToAddPageCommand { get; } = new AsyncReactiveCommand();
+        public AsyncReactiveCommand<Timecard> NavigateToEditPageCommand { get; } = new AsyncReactiveCommand<Timecard>();
 
         public HistoryPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "History";
+
+            NavigateToAddPageCommand.Subscribe(_ => NavigateToAddPage());
+            NavigateToEditPageCommand.Subscribe( timecard => NavigateToEditPage(timecard));
         }
 
         public override void OnAppearing()
@@ -30,34 +33,34 @@ namespace SimpleTimecard.ViewModels
             var realm = Realm.GetInstance();
             var allTimecards = realm.All<Timecard>().ToList();
 
-            TimecardHistories = allTimecards.OrderBy(x => x.EntryDate).ToList();
+            TimecardHistories.Value = allTimecards.OrderBy(x => x.EntryDate).ToList();
         }
 
-        public Command OnClickAdd => new Command(async () =>
+        // 追加画面へ遷移
+        private async Task NavigateToAddPage()
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddPage), useModalNavigation: true);
-        });
+        }
 
-        public Command OnClickListViewCell => new Command<Timecard>(async (timecard) =>
+        // 編集画面へ遷移
+        private async Task NavigateToEditPage(Timecard timecard)
         {
             var param = new NavigationParameters();
             param.Add(nameof(Timecard), timecard);
-
             await NavigationService.NavigateAsync(nameof(EditPage), param);
-        });
+        }
 
+        // 削除
         public void DeleteTimecard(string timecardId)
         {
-            // 削除
             var realm = Realm.GetInstance();
             var target = realm.Find<Timecard>(timecardId);
             realm.Write(() => {
                 realm.Remove(target);
             });
 
-            // 再取得
             var allTimecards = realm.All<Timecard>().ToList();
-            TimecardHistories = allTimecards;
+            TimecardHistories.Value = allTimecards;
 
             DependencyService.Get<IToast>().Show("削除しました。");
         }

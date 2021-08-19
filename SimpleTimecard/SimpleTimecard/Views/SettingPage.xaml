@@ -10,12 +10,6 @@
     Visual="Material"
     Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Text="{x:Static resources:AppResources.ButtonClose}"
-            Command="{Binding Path=OnClickClose}"/>
-    </ContentPage.ToolbarItems>
-
     <sv:SettingsView HasUnevenRows="true">
         <sv:Section
             Title="データベース"
@@ -24,7 +18,7 @@
                 Title="データベース初期化"
                 TitleAlignment="Center"
                 TitleColor="#CC9900"
-                Command="{Binding Path=OnClickInitializedDatabase}"/>
+                Command="{Binding Path=InitializeDatabaseButtonCommand}"/>
         </sv:Section>
     </sv:SettingsView>
 

@@ -1,5 +1,7 @@
-﻿using Prism.Navigation;
+﻿using System.Threading.Tasks;
+using Prism.Navigation;
 using Prism.Services;
+using Reactive.Bindings;
 using Realms;
 using SimpleTimecard.Common;
 using SimpleTimecard.Interfaces;
@@ -12,13 +14,17 @@ namespace SimpleTimecard.ViewModels
     {
         private readonly IPageDialogService _pageDialogService;
 
+        public AsyncReactiveCommand InitializeDatabaseButtonCommand { get; } = new AsyncReactiveCommand();
+
         public SettingPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
             Title = "設定";
             _pageDialogService = pageDialogService;
+
+            InitializeDatabaseButtonCommand.Subscribe(_ => InitializeDatabase());
         }
 
-        public Command OnClickInitializedDatabase => new Command(async () =>
+        private async Task InitializeDatabase()
         {
             Logger.Trace();
 
@@ -38,11 +44,6 @@ namespace SimpleTimecard.ViewModels
             }
 
             DependencyService.Get<IToast>().Show("データを全削除しました。");
-        });
-
-        public Command OnClickClose => new Command(async () =>
-        {
-            await base.NavigationService.GoBackAsync(useModalNavigation: true);
-        });
+        }
     }
 }

@@ -13,7 +13,7 @@
     <StackLayout Orientation="Vertical">
         <Button
             Text="{x:Static resources:AppResources.ButtonAdd}"
-            Command="{Binding Path=OnClickAdd}"
+            Command="{Binding NavigateToAddPageCommand}"
             HorizontalOptions="FillAndExpand"
             Margin="8"
             FontSize="Default"
@@ -22,11 +22,12 @@
             BorderColor="LightGray"
             BorderWidth="1"/>
         <ListView
-            ItemsSource="{Binding TimecardHistories}"
+            ItemsSource="{Binding TimecardHistories.Value}"
             SeparatorColor="DarkGray"
             BackgroundColor="White">
             <ListView.Behaviors>
-                <behaviors:ListViewItemTappedBehavior Command="{Binding Path=OnClickListViewCell}" />
+                <behaviors:ListViewItemTappedBehavior
+                    Command="{Binding NavigateToEditPageCommand}" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>

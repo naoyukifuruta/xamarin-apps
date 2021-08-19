@@ -7,7 +7,6 @@ using Reactive.Bindings;
 using Realms;
 using SimpleTimecard.Common;
 using SimpleTimecard.Models;
-using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -17,26 +16,20 @@ namespace SimpleTimecard.ViewModels
 
         private string _todayTimecardId;
 
-        private string _stampingStartTimeLabelText = string.Empty;
-        public string StampingStartTimeLabelText
-        {
-            get { return _stampingStartTimeLabelText; }
-            set { SetProperty(ref _stampingStartTimeLabelText, value); }
-        }
+        public ReactiveProperty<string> NowDateTime { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<string> StampingStartTime { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<string> StampingEndTime { get; } = new ReactiveProperty<string>();
 
-        private string _stampingEndTimeLabelText = string.Empty;
-        public string StampingEndTimeLabelText
-        {
-            get { return _stampingEndTimeLabelText; }
-            set { SetProperty(ref _stampingEndTimeLabelText, value); }
-        }
-
-        public ReactiveProperty<string> NowDateTime { get; set; } = new ReactiveProperty<string>();
+        public AsyncReactiveCommand RegisterStartTimeCommand { get; } = new AsyncReactiveCommand();
+        public AsyncReactiveCommand RegisterEndTimeCommand { get; } = new AsyncReactiveCommand();
 
         public TodayPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
             Title = "Today";
             _pageDialogService = pageDialogService;
+
+            RegisterStartTimeCommand.Subscribe(_ => RegisterStartTime());
+            RegisterEndTimeCommand.Subscribe(_ => RegisterEndTime());
 
             // 現在日時
             new Task(async () =>
@@ -62,17 +55,15 @@ namespace SimpleTimecard.ViewModels
             Logger.Trace();
             base.OnAppearing();
 
-            // 今日分の表示
             var todayTimecard = FetchTodayTimecard();
             _todayTimecardId = todayTimecard.TimecardId;
-            StampingStartTimeLabelText = todayTimecard.StartTimeString;
-            StampingEndTimeLabelText = todayTimecard.EndTimeString;
+
+            StampingStartTime.Value = todayTimecard.StartTimeString;
+            StampingEndTime.Value = todayTimecard.EndTimeString;
         }
 
-        /// <summary>
-        /// 出勤登録
-        /// </summary>
-        public Command OnClickStartTimeEntry => new Command(async () =>
+        // 出勤時間登録
+        public async Task RegisterStartTime()
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "出勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -81,13 +72,11 @@ namespace SimpleTimecard.ViewModels
             }
 
             var timecard = RegisteredTimecard(RegistType.StartTime);
-            StampingStartTimeLabelText = timecard.StartTimeString;
-        });
+            StampingStartTime.Value = timecard.StartTimeString;
+        }
 
-        /// <summary>
-        /// 退勤登録
-        /// </summary>
-        public Command OnClickEndTimeEntry => new Command(async () =>
+        // 退勤時間登録
+        public async Task RegisterEndTime()
         {
             var result = await _pageDialogService.DisplayAlertAsync("確認", "退勤時間の登録を行いますか？", "OK", "キャンセル");
             if (!result)
@@ -96,13 +85,10 @@ namespace SimpleTimecard.ViewModels
             }
 
             var timecard = RegisteredTimecard(RegistType.EndTime);
-            StampingEndTimeLabelText = timecard.EndTimeString;
-        });
+            StampingEndTime.Value = timecard.EndTimeString;
+        }
 
-        /// <summary>
-        /// 今日の出退勤時間を取得
-        /// </summary>
-        /// <returns>今日のタイムカード</returns>
+        // 今日の出退勤を取得
         private Timecard FetchTodayTimecard()
         {
             var realm = Realm.GetInstance();
@@ -127,11 +113,7 @@ namespace SimpleTimecard.ViewModels
             EndTime,
         }
 
-        /// <summary>
-        /// 出退勤時間の登録
-        /// </summary>
-        /// <param name="registType">登録種別</param>
-        /// <returns>タイムカード</returns>
+        // 出退勤時間の登録
         private Timecard RegisteredTimecard(RegistType registType)
         {
             var entryDateTime = DateTime.Now.ToLocalTime();
