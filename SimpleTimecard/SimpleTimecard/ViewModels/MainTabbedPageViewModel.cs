@@ -1,7 +1,5 @@
 ﻿using Prism.Navigation;
 using SimpleTimecard.Common;
-using SimpleTimecard.Views;
-using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -10,11 +8,7 @@ namespace SimpleTimecard.ViewModels
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Logger.Trace();
+            Title = string.Empty;
         }
-
-        public Command OnClickSetting => new Command(async () =>
-        {
-            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(SettingPage), useModalNavigation: true);
-        });
     }
 }

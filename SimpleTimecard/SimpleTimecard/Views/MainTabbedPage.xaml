@@ -14,7 +14,7 @@
         <ToolbarItem
             Text="{x:Static resources:AppResources.ButtonSetting}"
             IconImageSource="settings.png"
-            Command="{Binding Path=OnClickSetting}"/>
+            Command="{prism:NavigateTo 'SettingPage'}"/>
     </TabbedPage.ToolbarItems>
 
     <views:TodayPage
