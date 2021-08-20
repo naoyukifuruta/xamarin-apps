@@ -47,7 +47,7 @@
                 BorderWidth="1"/>
             <Button
                 Text="{x:Static resources:AppResources.ButtonUpdate}"
-                Command="{Binding Path=Update}"
+                Command="{Binding Path=UpdateCommand}"
                 WidthRequest="120"
                 HeightRequest="40"
                 FontSize="Default"
