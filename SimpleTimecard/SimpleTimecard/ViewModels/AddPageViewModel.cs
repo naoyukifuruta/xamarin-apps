@@ -1,63 +1,45 @@
 ﻿using System;
-using Prism.Commands;
+using System.Threading.Tasks;
 using Prism.Navigation;
+using Reactive.Bindings;
 using Realms;
 using SimpleTimecard.Models;
-using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
     public class AddPageViewModel : ViewModelBase
     {
-        private DateTime _selectedEntryDate;
-        public DateTime SelectedEntryDate
-        {
-            get { return _selectedEntryDate; }
-            set { SetProperty(ref _selectedEntryDate, value); }
-        }
+        public ReactiveProperty<DateTime> SelectedEntryDate { get; } = new ReactiveProperty<DateTime>();
+        public ReactiveProperty<TimeSpan> SelectedStartTime { get; } = new ReactiveProperty<TimeSpan>();
+        public ReactiveProperty<TimeSpan> SelectedEndTime { get; } = new ReactiveProperty<TimeSpan>();
 
-        private TimeSpan _selectedStartTime;
-        public TimeSpan SelectedStartTime
-        {
-            get { return _selectedStartTime; }
-            set { SetProperty(ref _selectedStartTime, value); }
-        }
-
-        private TimeSpan _selectedEndTime;
-        public TimeSpan SelectedEndTime
-        {
-            get { return _selectedEndTime; }
-            set { SetProperty(ref _selectedEndTime, value); }
-        }
+        public AsyncReactiveCommand RegisterCommand { get; } = new AsyncReactiveCommand();
 
         public AddPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "追加";
 
-            SelectedEntryDate = DateTime.Now;
-            SelectedStartTime = new TimeSpan();
-            SelectedEndTime = new TimeSpan();
+            SelectedEntryDate.Value = DateTime.Now;
+            SelectedStartTime.Value = new TimeSpan();
+            SelectedEndTime.Value = new TimeSpan();
+
+            RegisterCommand.Subscribe(_ => Register());
         }
 
-        public Command OnClickEntry => new Command(async () =>
+        public async Task Register()
         {
             var realm = Realm.GetInstance();
             realm.Write(() =>
             {
                 var addedTimecard = realm.Add<Timecard>(new Timecard()
                 {
-                    EntryDate = SelectedEntryDate,
-                    StartTimeString = string.Format($"{SelectedStartTime.Hours.ToString("D2")}:{SelectedStartTime.Minutes.ToString("D2")}"),
-                    EndTimeString = string.Format($"{SelectedEndTime.Hours.ToString("D2")}:{SelectedEndTime.Minutes.ToString("D2")}"),
+                    EntryDate = SelectedEntryDate.Value,
+                    StartTimeString = string.Format($"{SelectedStartTime.Value.Hours.ToString("D2")}:{SelectedStartTime.Value.Minutes.ToString("D2")}"),
+                    EndTimeString = string.Format($"{SelectedEndTime.Value.Hours.ToString("D2")}:{SelectedEndTime.Value.Minutes.ToString("D2")}"),
                 });
             });
 
             await base.NavigationService.GoBackAsync(useModalNavigation: true);
-        });
-
-        public Command OnClickCancel => new Command(async () =>
-        {
-            await base.NavigationService.GoBackAsync(useModalNavigation: true);
-        });
+        }
     }
 }

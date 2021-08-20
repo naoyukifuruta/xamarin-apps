@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Prism.Navigation;
+using Reactive.Bindings;
 using Realms;
 using SimpleTimecard.Models;
-using Xamarin.Forms;
 
 namespace SimpleTimecard.ViewModels
 {
@@ -10,32 +11,19 @@ namespace SimpleTimecard.ViewModels
     {
         private string _timecardId = string.Empty;
 
-        private DateTime _selectedEntryDate;
-        public DateTime SelectedEntryDate
-        {
-            get { return _selectedEntryDate; }
-            set { SetProperty(ref _selectedEntryDate, value); }
-        }
+        public ReactiveProperty<DateTime> SelectedEntryDate { get; } = new ReactiveProperty<DateTime>();
+        public ReactiveProperty<TimeSpan> SelectedStartTime { get; } = new ReactiveProperty<TimeSpan>();
+        public ReactiveProperty<TimeSpan> SelectedEndTime { get; } = new ReactiveProperty<TimeSpan>();
 
-        private TimeSpan _selectedStartTime;
-        public TimeSpan SelectedStartTime
-        {
-            get { return _selectedStartTime; }
-            set { SetProperty(ref _selectedStartTime, value); }
-        }
-
-        private TimeSpan _selectedEndTime;
-        public TimeSpan SelectedEndTime
-        {
-            get { return _selectedEndTime; }
-            set { SetProperty(ref _selectedEndTime, value); }
-        }
+        public AsyncReactiveCommand UpdateCommand { get; } = new AsyncReactiveCommand();
 
         public EditPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            SelectedEntryDate = DateTime.Now;
-            SelectedStartTime = new TimeSpan();
-            SelectedEndTime = new TimeSpan();
+            SelectedEntryDate.Value = DateTime.Now;
+            SelectedStartTime.Value = new TimeSpan();
+            SelectedEndTime.Value = new TimeSpan();
+
+            UpdateCommand.Subscribe(_ => Update());
         }
 
         // 画面遷移時
@@ -50,14 +38,11 @@ namespace SimpleTimecard.ViewModels
             _timecardId = val.TimecardId;
 
             Title = val.EntryDate.HasValue ? val.EntryDate.Value.ToLocalTime().DateTime.ToString("yyyy/MM/dd ddd") : string.Empty;
-            SelectedStartTime = TimeSpan.Parse(val.StartTimeString);
-            SelectedEndTime = TimeSpan.Parse(val.EndTimeString);
+            SelectedStartTime.Value = TimeSpan.Parse(val.StartTimeString);
+            SelectedEndTime.Value = TimeSpan.Parse(val.EndTimeString);
         }
 
-        /// <summary>
-        /// 更新
-        /// </summary>
-        public Command OnClickUpdate => new Command(async () =>
+        public async Task Update()
         {
             var realm = Realm.GetInstance();
 
@@ -69,26 +54,18 @@ namespace SimpleTimecard.ViewModels
             });
 
             await base.NavigationService.GoBackAsync();
-        });
-
-        /// <summary>
-        /// キャンセル（前の画面に戻る）
-        /// </summary>
-        public Command OnClickCancel => new Command(async () =>
-        {
-            await base.NavigationService.GoBackAsync();
-        });
+        }
 
         // 出勤時間を取得(HH:mm)
         private string GetInputStartTime()
         {
-            return string.Format($"{SelectedStartTime.Hours.ToString("D2")}:{SelectedStartTime.Minutes.ToString("D2")}");
+            return string.Format($"{SelectedStartTime.Value.Hours.ToString("D2")}:{SelectedStartTime.Value.Minutes.ToString("D2")}");
         }
 
         // 退勤時間を取得(HH:mm)
         private string GetInputEndTime()
         {
-            return string.Format($"{SelectedEndTime.Hours.ToString("D2")}:{SelectedEndTime.Minutes.ToString("D2")}");
+            return string.Format($"{SelectedEndTime.Value.Hours.ToString("D2")}:{SelectedEndTime.Value.Minutes.ToString("D2")}");
         }
     }
 }

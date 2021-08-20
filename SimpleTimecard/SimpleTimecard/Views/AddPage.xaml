@@ -17,7 +17,7 @@
                 VerticalTextAlignment="Center"
                 Margin="0,0,8,0"/>
             <DatePicker
-                Date="{Binding SelectedEntryDate}"
+                Date="{Binding SelectedEntryDate.Value}"
                 Format="yyyy/MM/dd"
                 MinimumDate="2000/01/01"
                 MaximumDate="2030/01/01"
@@ -30,7 +30,7 @@
                 VerticalTextAlignment="Center"
                 Margin="0,0,8,0"/>
             <TimePicker
-                Time="{Binding SelectedStartTime}"
+                Time="{Binding SelectedStartTime.Value}"
                 HorizontalOptions="FillAndExpand"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
@@ -40,7 +40,7 @@
                 VerticalTextAlignment="Center"
                 Margin="0,0,8,0"/>
             <TimePicker
-                Time="{Binding SelectedEndTime}"
+                Time="{Binding SelectedEndTime.Value}"
                 HorizontalOptions="FillAndExpand"/>
         </StackLayout>
         <StackLayout
@@ -49,7 +49,8 @@
             Margin="0,48,0,0">
             <Button
                 Text="{x:Static resources:AppResources.ButtonCancel}"
-                Command="{Binding Path=OnClickCancel}"
+                Command="{prism:GoBack}"
+                CommandParameter="{prism:GoBack UseModalNavigation=True}"
                 WidthRequest="120"
                 HeightRequest="40"
                 FontSize="Default"
@@ -59,7 +60,7 @@
                 BorderWidth="1"/>
             <Button
                 Text="{x:Static resources:AppResources.ButtonRegist}"
-                Command="{Binding Path=OnClickEntry}"
+                Command="{Binding RegisterCommand}"
                 WidthRequest="120"
                 HeightRequest="40"
                 FontSize="Default"
